@@ -1,0 +1,42 @@
+.exit-button {
+    -fx-background-color: #F23022;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-alignment: center;
+}
+
+.exit-button:hover {
+    -fx-background-color: #FF4A3C;
+}
+
+.title {
+    -fx-font-size: 40px;
+    -fx-text-fill: #003366;
+}
+
+.background {
+    -fx-background-color: lightgrey;
+    -fx-border-color: #003366;
+}
+
+.text {
+    -fx-text-fill: #003366;
+}
+.login-button {
+    -fx-text-fill: #003366;
+    -fx-background-color: #C7C7C7;
+    -fx-border-color: #003366;
+    -fx-background-radius: 0;
+}
+
+
+.login-button:hover {
+    -fx-background-color: #1A4D80;
+}
+
+.textField {
+    -fx-border-color: green;
+    -fx-border-radius: 20px;
+    -fx-background-color: none;
+}
