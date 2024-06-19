@@ -82,7 +82,7 @@ public class AuthController implements Initializable {
     private void loadMainScene() throws IOException {
         Stage mainStage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("dashboard-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
         mainStage.setTitle("Service Desk");
         mainStage.setScene(scene);

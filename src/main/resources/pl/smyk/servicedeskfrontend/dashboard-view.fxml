@@ -1,19 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@css/dashboard-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.DashboardController">
+<AnchorPane fx:id="dashboardAnchorPane" prefHeight="768.0" prefWidth="824.0" stylesheets="@css/dashboard-view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="menuAnchorPane" prefHeight="768.0" prefWidth="257.0" styleClass="menu">
+      <AnchorPane layoutX="12.0" layoutY="14.0" prefHeight="50.0" prefWidth="800.0">
          <children>
-            <Button fx:id="view1Button" layoutX="63.0" layoutY="109.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="view1" />
-            <Button fx:id="view2Button" layoutX="103.0" layoutY="652.0" mnemonicParsing="false" text="view2" />
-            <Button fx:id="view1Button1" layoutX="63.0" layoutY="185.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="view1" />
-            <Button fx:id="view1Button2" layoutX="63.0" layoutY="265.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="view1" />
-            <Button fx:id="view1Button3" layoutX="63.0" layoutY="344.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="view1" />
+            <Label layoutX="14.0" layoutY="8.0" text="Dashboard">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="contentAnchorPane" layoutX="257.0" prefHeight="768.0" prefWidth="766.0" stylesheets="@css/dashboard-view.css" />
+      <AnchorPane fx:id="dashboardContentAnchorPane" layoutX="14.0" layoutY="71.0" prefHeight="685.0" prefWidth="800.0" styleClass="content-anchorPane">
+         <children>
+            <Pane fx:id="cardPane" layoutX="14.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+               </children>
+               <styleClass>
+                  <String fx:value="card-pane" />
+                  <String fx:value="card-grey" />
+               </styleClass>
+            </Pane>
+            <Pane fx:id="cardPane1" layoutX="281.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+               </children>
+               <styleClass>
+                  <String fx:value="card-pane" />
+                  <String fx:value="card-grey" />
+               </styleClass>
+            </Pane>
+            <Pane fx:id="cardPane11" layoutX="564.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+               </children>
+               <styleClass>
+                  <String fx:value="card-blue" />
+                  <String fx:value="card-pane" />
+               </styleClass>
+            </Pane>
+            <Pane fx:id="cardPane12" layoutX="14.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+               </children>
+               <styleClass>
+                  <String fx:value="card-pane" />
+                  <String fx:value="card-blue" />
+               </styleClass>
+            </Pane>
+            <Pane fx:id="cardPane13" layoutX="281.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+               </children>
+               <styleClass>
+                  <String fx:value="card-pane" />
+                  <String fx:value="card-purple" />
+               </styleClass>
+            </Pane>
+            <Pane fx:id="cardPane14" layoutX="564.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+               </children>
+               <styleClass>
+                  <String fx:value="card-pane" />
+                  <String fx:value="card-dark" />
+               </styleClass>
+            </Pane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
