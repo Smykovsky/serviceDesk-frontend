@@ -6,15 +6,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.springframework.web.client.RestTemplate;
 import pl.smyk.servicedeskfrontend.MainApp;
+import pl.smyk.servicedeskfrontend.rest.Authenticator;
+import pl.smyk.servicedeskfrontend.rest.AuthenticatorImpl;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    private RestTemplate restTemplate;
+    private Authenticator authenticator;
     @FXML
     private AnchorPane mainAnchorPane;
     @FXML
@@ -35,6 +39,10 @@ public class MainController implements Initializable {
     @FXML
     private Button logoutButton;
 
+    public MainController() {
+        restTemplate = new RestTemplate();
+        authenticator = new AuthenticatorImpl();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -67,7 +75,12 @@ public class MainController implements Initializable {
 
     private void initializeLogoutButton() {
         logoutButton.setOnAction((x) -> {
-            //logout logic
+            authenticator.handleLogout();
+            try {
+                loadAuthScene();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
@@ -82,7 +95,26 @@ public class MainController implements Initializable {
         }
     }
 
-    private Stage getStage() {
-        return (Stage) mainAnchorPane.getScene().getWindow();
+    private void loadAuthScene() throws IOException {
+        Stage mainStage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("auth-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        mainStage.setTitle("Service Desk");
+        mainStage.setScene(scene);
+        mainStage.show();
+        getMainStage().close();
+    }
+
+    private Stage getMainStage() {
+        if (mainAnchorPane != null) {
+            return (Stage) mainAnchorPane.getScene().getWindow();
+        } else {
+            return null;
+        }
+    }
+
+    private Stage getContentStage() {
+        return (Stage) contentAnchorPane.getScene().getWindow();
     }
 }

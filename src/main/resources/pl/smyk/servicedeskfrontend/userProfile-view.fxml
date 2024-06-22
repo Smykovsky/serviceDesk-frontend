@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="824.0" stylesheets="@css/userPanel-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="768.0" prefWidth="824.0" stylesheets="@css/userProfile-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label layoutX="40.0" layoutY="20.0" styleClass="header-label" text="Profil Użytkownika">
             <font>
                 <Font name="Arial" size="36.0" />
             </font>
         </Label>
-        <GridPane layoutX="40.0" layoutY="100.0" prefHeight="600.0" prefWidth="650">
+        <GridPane layoutX="40.0" layoutY="100.0" prefHeight="600.0" prefWidth="650.0" stylesheets="@css/userPanel-view.css">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="250.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="400.0" />

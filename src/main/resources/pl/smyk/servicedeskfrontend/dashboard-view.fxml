@@ -28,7 +28,7 @@
       </AnchorPane>
       <AnchorPane fx:id="dashboardContentAnchorPane" layoutX="14.0" layoutY="71.0" prefHeight="685.0" prefWidth="800.0" styleClass="content-anchorPane">
          <children>
-            <Pane fx:id="cardPane" layoutX="14.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
+            <Pane fx:id="notAssignedCard" layoutX="14.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
@@ -42,70 +42,70 @@
                   <String fx:value="card-grey" />
                </styleClass>
             </Pane>
-            <Pane fx:id="cardPane1" layoutX="281.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
+            <Pane fx:id="myNotSolvedCard" layoutX="281.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Moje nierozwiązane zgłoszenia" />
                </children>
                <styleClass>
                   <String fx:value="card-pane" />
                   <String fx:value="card-grey" />
                </styleClass>
             </Pane>
-            <Pane fx:id="cardPane11" layoutX="564.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
+            <Pane fx:id="mySolvedCard" layoutX="564.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Moje rozwiązane zgłoszenia" />
                </children>
                <styleClass>
                   <String fx:value="card-blue" />
                   <String fx:value="card-pane" />
                </styleClass>
             </Pane>
-            <Pane fx:id="cardPane12" layoutX="14.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
+            <Pane fx:id="allAssignedCard" layoutX="14.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Wszystkie przypisane zgłoszenia" />
                </children>
                <styleClass>
                   <String fx:value="card-pane" />
                   <String fx:value="card-blue" />
                </styleClass>
             </Pane>
-            <Pane fx:id="cardPane13" layoutX="281.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
+            <Pane fx:id="myInProgressCard" layoutX="281.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="W trakcie realizacji" />
                </children>
                <styleClass>
                   <String fx:value="card-pane" />
                   <String fx:value="card-purple" />
                </styleClass>
             </Pane>
-            <Pane fx:id="cardPane14" layoutX="564.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
+            <Pane fx:id="allSolvedCard" layoutX="564.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Nieprzypisane zgłoszenia" />
+                  <Label layoutY="50.0" prefHeight="30.0" prefWidth="200.0" styleClass="card-label" text="Rozwiązane zgłoszenia" />
                </children>
                <styleClass>
                   <String fx:value="card-pane" />

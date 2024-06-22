@@ -1,14 +1,17 @@
 package pl.smyk.servicedeskfrontend.rest;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import pl.smyk.servicedeskfrontend.dto.UserAuthenticationResultDto;
+import pl.smyk.servicedeskfrontend.dto.AuthResponse;
 import pl.smyk.servicedeskfrontend.dto.UserCredentialsDto;
 import pl.smyk.servicedeskfrontend.handler.AuthenticationResultHandler;
+import pl.smyk.servicedeskfrontend.session.SessionManager;
 
 public class AuthenticatorImpl implements Authenticator{
-    public static final String AUTH_URL = "http://localhost:8080/api/auth/login";
+    public static final String AUTH_URL = "http://localhost:8080/api/auth";
 
     private final RestTemplate restTemplate;
 
@@ -27,8 +30,33 @@ public class AuthenticatorImpl implements Authenticator{
         authThread.start();
     }
 
-    private void authProcess(UserCredentialsDto dto, AuthenticationResultHandler handler) {
-        ResponseEntity<UserAuthenticationResultDto> response = restTemplate.postForEntity(AUTH_URL, dto, UserAuthenticationResultDto.class);
-        handler.handle(response.getBody());
+    @Override
+    public void handleLogout() {
+        try {
+            String accessToken = SessionManager.getInstance().getAccessToken();
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.set("Authorization", "Baerer " + accessToken);
+            HttpEntity<String> request = new HttpEntity<>(httpHeaders);
+
+            restTemplate.exchange(AUTH_URL + "/logout", HttpMethod.POST, request, String.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            SessionManager.getInstance().clearSession();
+        }
     }
+
+    private void authProcess(UserCredentialsDto dto, AuthenticationResultHandler handler) {
+        ResponseEntity<AuthResponse> response = restTemplate.postForEntity(AUTH_URL + "/login", dto, AuthResponse.class);
+
+        if (response.getStatusCode().is2xxSuccessful()){
+            SessionManager.getInstance().setAccessToken(response.getBody().getAccessToken());
+            SessionManager.getInstance().setRefreshToken(response.getBody().getRefreshToken());
+            handler.handle(response.getBody());
+        } else {
+            System.out.println("ERROR!");
+        }
+    }
+
+
 }

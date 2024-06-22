@@ -5,4 +5,5 @@ import pl.smyk.servicedeskfrontend.handler.AuthenticationResultHandler;
 
 public interface Authenticator {
     void authenticate(UserCredentialsDto dto, AuthenticationResultHandler handler);
+    void handleLogout();
 }

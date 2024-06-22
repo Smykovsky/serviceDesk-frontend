@@ -10,6 +10,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pl.smyk.servicedeskfrontend.MainApp;
@@ -20,6 +21,23 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
+    @FXML
+    private Pane notAssignedCard;
+
+    @FXML
+    private Pane myNotSolvedCard;
+
+    @FXML
+    private Pane mySolvedCard;
+
+    @FXML
+    private Pane allAssignedCard;
+
+    @FXML
+    private Pane myInProgressCard;
+
+    @FXML
+    private Pane allSolvedCard;
 
     @FXML
     private Button addButton;
@@ -51,6 +69,32 @@ public class DashboardController implements Initializable {
         series.getData().add(new XYChart.Data("2024-04-01", 5));
 
         lineChart.getData().addAll(series);
+    }
+
+    private void openAllNotAssignedReportsView() {
+
+    }
+
+    private void openMyNotSolvedReportsView() {
+
+    }
+
+    private void openMySolvedReports() {
+
+    }
+
+    private void openAllAssignedReportsView() {
+        allAssignedCard.setOnMouseClicked(x -> {
+            System.out.println("assigned!");
+        });
+    }
+
+    private void openMyInProgressReportsView() {
+
+    }
+
+    private void openAllSolvedReportsView() {
+
     }
 
     private void initializeAddButton() {

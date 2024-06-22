@@ -8,6 +8,8 @@ module pl.smyk.servicedeskfrontend {
     requires spring.web;
 
     opens pl.smyk.servicedeskfrontend to javafx.fxml;
+    exports pl.smyk.servicedeskfrontend.dto;
+    exports pl.smyk.servicedeskfrontend.controller;
     exports pl.smyk.servicedeskfrontend;
     opens pl.smyk.servicedeskfrontend.controller to javafx.fxml;
 }
