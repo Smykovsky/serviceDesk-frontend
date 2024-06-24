@@ -1,0 +1,27 @@
+.pagination{
+    -fx-base: grey;
+    -fx-background-radius: 35;
+    -fx-border-radius: 35;
+}
+.pagination .toggle-button {
+    -fx-shape:"m74.63,72.21494l14.50002,-14.49994l14.49998,14.49994l-14.49998,14.50002l-14.50002,-14.50002z";
+    -fx-background-radius:3px;
+}
+.pagination .button{
+    -fx-padding: 8 10 8 10px;
+    -fx-background-radius:0px;
+}
+
+
+.table-view .column-header {
+    -fx-font-size: 16px;
+    -fx-font-family: "Times New Roman";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+.table-view .table-view .table-cell {
+    -fx-font-size: 14px;
+    -fx-font-family: "Times New Roman";
+    -fx-text-fill: black;
+}

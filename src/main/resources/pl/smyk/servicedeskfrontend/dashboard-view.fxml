@@ -28,7 +28,7 @@
       </AnchorPane>
       <AnchorPane fx:id="dashboardContentAnchorPane" layoutX="14.0" layoutY="71.0" prefHeight="685.0" prefWidth="800.0" styleClass="content-anchorPane">
          <children>
-            <Pane fx:id="notAssignedCard" layoutX="14.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
+            <Pane fx:id="allNotAssignedCard" layoutX="14.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
@@ -42,7 +42,7 @@
                   <String fx:value="card-grey" />
                </styleClass>
             </Pane>
-            <Pane fx:id="myNotSolvedCard" layoutX="281.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
+            <Pane fx:id="myNotClosedCard" layoutX="281.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
@@ -56,7 +56,7 @@
                   <String fx:value="card-grey" />
                </styleClass>
             </Pane>
-            <Pane fx:id="mySolvedCard" layoutX="564.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
+            <Pane fx:id="myClosedCard" layoutX="564.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
@@ -98,7 +98,7 @@
                   <String fx:value="card-purple" />
                </styleClass>
             </Pane>
-            <Pane fx:id="allSolvedCard" layoutX="564.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
+            <Pane fx:id="allClosedCard" layoutX="564.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
                <children>
                   <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>

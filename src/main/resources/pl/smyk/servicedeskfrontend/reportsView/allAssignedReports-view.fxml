@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="824.0" styleClass="root-pane" stylesheets="@../css/notAssignedReports-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.ReportViewController">
+   <children>
+      <Pagination fx:id="pagination" layoutX="24.0" layoutY="89.0" prefHeight="668.0" prefWidth="783.0" styleClass="pagination" />
+      <Label layoutX="314.0" layoutY="31.0" text="Assigned Reports">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
