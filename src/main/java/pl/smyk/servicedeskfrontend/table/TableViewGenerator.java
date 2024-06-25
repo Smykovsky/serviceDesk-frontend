@@ -28,6 +28,11 @@ public class TableViewGenerator <T> {
     public TableView<T> createTableView(ObservableList<T> data, AnchorPane mainAnchorPane) {
         tableView.getColumns().clear();
 
+        if (data.isEmpty()) {
+          tableView.setVisible(false);
+          return tableView;
+        }
+
         Class<?> c = data.get(0).getClass();
 
         for (Field field : c.getDeclaredFields()) {

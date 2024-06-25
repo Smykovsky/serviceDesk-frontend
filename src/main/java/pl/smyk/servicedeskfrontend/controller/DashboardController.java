@@ -16,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pl.smyk.servicedeskfrontend.MainApp;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
+import pl.smyk.servicedeskfrontend.manager.ReportCardManager;
 import pl.smyk.servicedeskfrontend.manager.ViewManager;
 import pl.smyk.servicedeskfrontend.rest.ReportRestClient;
 
@@ -91,36 +92,48 @@ public class DashboardController implements Initializable {
 
     private void openAllNotAssignedReportsView() {
         allNotAssignedCard.setOnMouseClicked((x) -> {
+            List<ReportDto> reportDtoList = reportRestClient.getAllNotAssignedReports();
+            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
             viewManager.loadView("reportsView/allNotAssignedReports-view.fxml");
         });
     }
 
     private void openMyNotClosedReportsView() {
         myNotClosedCard.setOnMouseClicked((x) -> {
+            List<ReportDto> reportDtoList = reportRestClient.getMyNotClosedReports();
+            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
             viewManager.loadView("reportsView/myNotClosedReports-view.fxml");
         });
     }
 
     private void openMyClosedReportsView() {
         myClosedCard.setOnMouseClicked((x) -> {
+            List<ReportDto> reportDtoList = reportRestClient.getMyAllClosedReports();
+            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
             viewManager.loadView("reportsView/myClosedReports-view.fxml");
         });
     }
 
     private void openAllAssignedReportsView() {
         allAssignedCard.setOnMouseClicked(x -> {
+            List<ReportDto> reportDtoList = reportRestClient.getAllAssignedReports();
+            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
             viewManager.loadView("reportsView/allAssignedReports-view.fxml");
         });
     }
 
     private void openMyInProgressReportsView() {
         myInProgressCard.setOnMouseClicked((x) -> {
+            List<ReportDto> reportDtoList = reportRestClient.getMyInProgressReports();
+            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
             viewManager.loadView("reportsView/myInProgressReports-view.fxml");
         });
     }
 
     private void openAllSolvedReportsView() {
         allClosedCard.setOnMouseClicked((x) -> {
+            List<ReportDto> reportDtoList = reportRestClient.getMyAllClosedReports();
+            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
             viewManager.loadView("reportsView/myClosedReports-view.fxml");
         });
     }
