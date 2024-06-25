@@ -64,7 +64,7 @@ public class ReportRestClient {
         return Arrays.asList(response.getBody());
     }
 
-    public List<ReportDto> getAllAssignedReported() {
+    public List<ReportDto> getAllAssignedReports() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
         HttpEntity<?> entity = new HttpEntity<>(headers);

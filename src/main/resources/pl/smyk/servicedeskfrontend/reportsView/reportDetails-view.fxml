@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="768.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.ReportDetailsController">
+            <Label layoutX="24.0" layoutY="222.0" text="ID:" />
+            <Label fx:id="idLabel" layoutX="81.0" layoutY="222.0" prefHeight="17.0" prefWidth="60.0" />
+
+            <Label layoutX="16.0" layoutY="275.0" text="Tytuł:" />
+            <Label fx:id="titleLabel" layoutX="98.0" layoutY="275.0" prefHeight="17.0" prefWidth="102.0" />
+
+            <Label layoutX="17.0" layoutY="322.0" text="Opis:" />
+            <Label fx:id="descriptionLabel" layoutX="108.0" layoutY="322.0" prefHeight="17.0" prefWidth="95.0" />
+
+            <Label layoutX="2.0" layoutY="376.0" text="Utworzone przez:" />
+            <Label fx:id="createdByLabel" layoutX="136.0" layoutY="376.0" prefHeight="17.0" prefWidth="128.0" />
+
+            <Label layoutX="8.0" layoutY="427.0" text="Przypisane użytkownikowi:" />
+            <Label fx:id="assignedUserLabel" layoutX="185.0" layoutY="427.0" prefHeight="17.0" prefWidth="128.0" />
+
+            <Label layoutX="7.0" layoutY="493.0" text="Priorytet:" />
+            <Label fx:id="priorityLabel" layoutX="105.0" layoutY="493.0" prefHeight="17.0" prefWidth="102.0" />
+
+            <Label layoutX="12.0" layoutY="543.0" text="Status:" />
+            <Label fx:id="statusLabel" layoutX="125.0" layoutY="543.0" prefHeight="17.0" prefWidth="60.0" />
+</AnchorPane>

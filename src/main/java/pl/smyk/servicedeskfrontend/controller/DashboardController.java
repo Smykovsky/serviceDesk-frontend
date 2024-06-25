@@ -3,6 +3,7 @@ package pl.smyk.servicedeskfrontend.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -15,14 +16,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pl.smyk.servicedeskfrontend.MainApp;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
+import pl.smyk.servicedeskfrontend.manager.ViewManager;
 import pl.smyk.servicedeskfrontend.rest.ReportRestClient;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class DashboardController implements Initializable {
     @FXML
@@ -58,9 +58,14 @@ public class DashboardController implements Initializable {
 
     @FXML
     private NumberAxis y;
+    private ViewManager viewManager;
+
+    private ReportRestClient reportRestClient;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        reportRestClient = new ReportRestClient();
+        viewManager = new ViewManager(this.dashboardAnchorPane);
         initializeAddButton();
         initializeLineChart();
     }
@@ -77,8 +82,8 @@ public class DashboardController implements Initializable {
 
         lineChart.getData().addAll(series);
         openAllNotAssignedReportsView();
-        openMyNotSolvedReportsView();
-        openMySolvedReports();
+        openMyNotClosedReportsView();
+        openMyClosedReportsView();
         openAllAssignedReportsView();
         openMyInProgressReportsView();
         openAllSolvedReportsView();
@@ -86,41 +91,39 @@ public class DashboardController implements Initializable {
 
     private void openAllNotAssignedReportsView() {
         allNotAssignedCard.setOnMouseClicked((x) -> {
-            loadReportTable("allNotAssignedReports-view.fxml");
+            viewManager.loadView("reportsView/allNotAssignedReports-view.fxml");
         });
     }
 
-    private void openMyNotSolvedReportsView() {
+    private void openMyNotClosedReportsView() {
         myNotClosedCard.setOnMouseClicked((x) -> {
-            loadReportTable("myNotClosedReports-view.fxml");
+            viewManager.loadView("reportsView/myNotClosedReports-view.fxml");
         });
     }
 
-    private void openMySolvedReports() {
+    private void openMyClosedReportsView() {
         myClosedCard.setOnMouseClicked((x) -> {
-            loadReportTable("myClosedReports-view.fxml");
+            viewManager.loadView("reportsView/myClosedReports-view.fxml");
         });
     }
 
     private void openAllAssignedReportsView() {
         allAssignedCard.setOnMouseClicked(x -> {
-            loadReportTable("allAssignedReports-view.fxml");
+            viewManager.loadView("reportsView/allAssignedReports-view.fxml");
         });
     }
 
     private void openMyInProgressReportsView() {
         myInProgressCard.setOnMouseClicked((x) -> {
-            loadReportTable("myInProgressReports-view.fxml");
+            viewManager.loadView("reportsView/myInProgressReports-view.fxml");
         });
     }
 
     private void openAllSolvedReportsView() {
         allClosedCard.setOnMouseClicked((x) -> {
-            loadReportTable("myClosedReports-view.fxml");
+            viewManager.loadView("reportsView/myClosedReports-view.fxml");
         });
     }
-
-
 
     private void initializeAddButton() {
         addButton.setOnAction((x) -> {
@@ -136,17 +139,6 @@ public class DashboardController implements Initializable {
                 throw new RuntimeException(e);
             }
         });
-    }
-
-    private void loadReportTable(String fxmlFile) {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("reportsView/" + fxmlFile));
-        try {
-            AnchorPane newPane = fxmlLoader.load();
-            dashboardAnchorPane.getChildren().clear();
-            dashboardAnchorPane.getChildren().add(newPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private Stage getStage() {

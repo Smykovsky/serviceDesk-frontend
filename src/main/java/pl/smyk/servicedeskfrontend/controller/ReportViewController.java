@@ -7,11 +7,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
 import pl.smyk.servicedeskfrontend.rest.ReportRestClient;
 import pl.smyk.servicedeskfrontend.table.TableViewGenerator;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -20,6 +23,9 @@ public class ReportViewController implements Initializable {
 
     @FXML
     private Pagination pagination;
+
+    @FXML
+    private AnchorPane mainAnchorPane;
     private static final int ROWS_PER_PAGE = 24;
     private ObservableList<ReportDto> reportObservableList;
     private TableViewGenerator<ReportDto> tableViewGenerator;
@@ -40,52 +46,14 @@ public class ReportViewController implements Initializable {
             });
         });
         thread.start();
-
-//        pagination.setPageFactory(new Callback<Integer, Node>() {
-//            @Override
-//            public javafx.scene.Node call(Integer pageIndex) {
-//                return createPage(pageIndex);
-//            }
-//        });
     }
 
     private TableView<ReportDto> createPage(int pageIndex) {
-        TableView<ReportDto> tableView = tableViewGenerator.createTableView(reportObservableList);
+        TableView<ReportDto> tableView = tableViewGenerator.createTableView(reportObservableList, this.mainAnchorPane);
         int start = pageIndex * ROWS_PER_PAGE;
         int end = Math.min(start + ROWS_PER_PAGE, reportObservableList.size());
         tableView.setItems(FXCollections.observableArrayList(reportObservableList.subList(start, end)));
 
         return tableView;
-
-//        TableView<Report> table = new TableView<>();
-//
-//        TableColumn<Report, Integer> idColumn = new TableColumn<>("ID");
-//        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        idColumn.setPrefWidth(50);
-//
-//        TableColumn<Report, String> tytulColumn = new TableColumn<>("Tytuł");
-//        tytulColumn.setCellValueFactory(new PropertyValueFactory<>("tytul"));
-//        tytulColumn.setPrefWidth(200);
-//
-//        TableColumn<Report, String> opisColumn = new TableColumn<>("Opis");
-//        opisColumn.setCellValueFactory(new PropertyValueFactory<>("opis"));
-//        opisColumn.setPrefWidth(300);
-//
-//        TableColumn<Report, String> statusColumn = new TableColumn<>("Status");
-//        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-//        statusColumn.setPrefWidth(100);
-//
-//        TableColumn<Report, String> dataColumn = new TableColumn<>("Data");
-//        dataColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
-//        dataColumn.setPrefWidth(150);
-//
-//        table.getColumns().addAll(idColumn, tytulColumn, opisColumn, statusColumn, dataColumn);
-//
-//        int start = pageIndex * ROWS_PER_PAGE;
-//        int end = Math.min(start + ROWS_PER_PAGE, reportObservableList.size());
-//        table.setItems(FXCollections.observableArrayList(reportObservableList.subList(start, end)));
-//
-//        return table;
     }
-
 }

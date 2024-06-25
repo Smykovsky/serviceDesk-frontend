@@ -2,22 +2,18 @@ package pl.smyk.servicedeskfrontend.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lombok.RequiredArgsConstructor;
-import pl.smyk.servicedeskfrontend.MainApp;
+import pl.smyk.servicedeskfrontend.manager.ViewManager;
 import pl.smyk.servicedeskfrontend.dto.UserCredentialsDto;
 import pl.smyk.servicedeskfrontend.factory.PopupFactory;
 import pl.smyk.servicedeskfrontend.rest.Authenticator;
 import pl.smyk.servicedeskfrontend.rest.AuthenticatorImpl;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -40,6 +36,8 @@ public class AuthController implements Initializable {
     @FXML
     private Button exitButton;
 
+    private ViewManager viewManager;
+
     public AuthController() {
         authenticator = new AuthenticatorImpl();
         popupFactory = new PopupFactory();
@@ -47,6 +45,7 @@ public class AuthController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        viewManager = new ViewManager(this.loginAnchorPane);
         initializeLoginButton();
         initializeExitButton();
     }
@@ -60,16 +59,16 @@ public class AuthController implements Initializable {
     }
 
     private void authenticateUser(){
-
-        UserCredentialsDto dto = new UserCredentialsDto(loginTextField.getText(), passwordTextField.getText());
+//        UserCredentialsDto dto = new UserCredentialsDto(loginTextField.getText(), passwordTextField.getText());
+        UserCredentialsDto dto = new UserCredentialsDto("operator.operator", "12345678");
         System.out.println(dto);
         authenticator.authenticate(dto, (authenticationResult) -> {
             Platform.runLater(() -> {
                 System.out.println("auth result: " + authenticationResult);
                 if (authenticationResult.getIsAuthenticated()) {
                     try {
-                        loadMainScene();
-                    } catch (IOException e) {
+                        viewManager.loadScene("main-view.fxml");
+                    } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 } else {
@@ -83,17 +82,6 @@ public class AuthController implements Initializable {
         exitButton.setOnAction((x) -> {
             getStage().close();
         });
-    }
-
-    private void loadMainScene() throws IOException {
-        Stage mainStage = new Stage();
-
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
-        mainStage.setTitle("Service Desk");
-        mainStage.setScene(scene);
-        mainStage.show();
-        getStage().close();
     }
 
     private Stage getStage() {
