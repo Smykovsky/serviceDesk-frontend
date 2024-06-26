@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import pl.smyk.servicedeskfrontend.manager.ViewManager;
 import pl.smyk.servicedeskfrontend.rest.Authenticator;
 import pl.smyk.servicedeskfrontend.rest.AuthenticatorImpl;
+import pl.smyk.servicedeskfrontend.session.SessionManager;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -58,6 +59,7 @@ public class MainController implements Initializable {
     private void initializeDashboardButton() {
         dashboardButton.setOnAction((x) -> {
             viewManager.loadView("dashboard-view.fxml");
+            System.out.println(SessionManager.getInstance().getUserRoles());
         });
     }
 

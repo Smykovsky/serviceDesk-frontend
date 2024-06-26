@@ -8,12 +8,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import pl.smyk.servicedeskfrontend.manager.ViewManager;
 import pl.smyk.servicedeskfrontend.dto.UserCredentialsDto;
 import pl.smyk.servicedeskfrontend.factory.PopupFactory;
 import pl.smyk.servicedeskfrontend.rest.Authenticator;
 import pl.smyk.servicedeskfrontend.rest.AuthenticatorImpl;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -58,24 +61,17 @@ public class AuthController implements Initializable {
         });
     }
 
-    private void authenticateUser(){
+    private void authenticateUser() {
 //        UserCredentialsDto dto = new UserCredentialsDto(loginTextField.getText(), passwordTextField.getText());
         UserCredentialsDto dto = new UserCredentialsDto("operator.operator", "12345678");
-        System.out.println(dto);
-        authenticator.authenticate(dto, (authenticationResult) -> {
-            Platform.runLater(() -> {
-                System.out.println("auth result: " + authenticationResult);
-                if (authenticationResult.getIsAuthenticated()) {
-                    try {
+            authenticator.authenticate(dto, (authenticationResult) -> {
+                System.out.println(authenticationResult);
+                Platform.runLater(() -> {
+                    if (authenticationResult.getIsAuthenticated()) {
                         viewManager.loadScene("main-view.fxml");
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
                     }
-                } else {
-                    popupFactory.createInfoPopup("Error! Try again.");
-                }
+                });
             });
-        });
     }
 
     private void initializeExitButton() {

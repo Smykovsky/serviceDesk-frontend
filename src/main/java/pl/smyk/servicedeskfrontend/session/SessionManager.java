@@ -1,9 +1,19 @@
 package pl.smyk.servicedeskfrontend.session;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+
+@Getter @Setter
 public class SessionManager {
     private static SessionManager instance;
     private String accessToken;
     private String refreshToken;
+    private List<String> userRoles;
 
     private SessionManager() {
 
@@ -16,25 +26,9 @@ public class SessionManager {
         return instance;
     }
 
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
     public void clearSession() {
         accessToken = null;
         refreshToken = null;
+        userRoles = null;
     }
 }

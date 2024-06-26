@@ -6,6 +6,8 @@ module pl.smyk.servicedeskfrontend {
     requires org.kordamp.bootstrapfx.core;
     requires lombok;
     requires spring.web;
+    requires java.jwt;
+    requires spring.core;
 
     opens pl.smyk.servicedeskfrontend to javafx.fxml;
     exports pl.smyk.servicedeskfrontend.dto;

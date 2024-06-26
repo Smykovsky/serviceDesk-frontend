@@ -1,5 +1,6 @@
 package pl.smyk.servicedeskfrontend.controller;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +23,7 @@ import pl.smyk.servicedeskfrontend.rest.ReportRestClient;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -60,12 +62,21 @@ public class DashboardController implements Initializable {
     @FXML
     private NumberAxis y;
     private ViewManager viewManager;
+    private HashMap<String, Integer> dashboardData;
 
     private ReportRestClient reportRestClient;
 
+    public DashboardController () {
+        reportRestClient = new ReportRestClient();
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        reportRestClient = new ReportRestClient();
+        Thread thread = new Thread(() -> {
+            dashboardData = reportRestClient.getDashboardData();
+            System.out.println(dashboardData);
+        });
+
+        thread.start();
         viewManager = new ViewManager(this.dashboardAnchorPane);
         initializeAddButton();
         initializeLineChart();

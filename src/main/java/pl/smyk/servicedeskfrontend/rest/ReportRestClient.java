@@ -1,5 +1,6 @@
 package pl.smyk.servicedeskfrontend.rest;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -9,6 +10,7 @@ import pl.smyk.servicedeskfrontend.dto.ReportDto;
 import pl.smyk.servicedeskfrontend.session.SessionManager;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class ReportRestClient {
@@ -107,6 +109,21 @@ public class ReportRestClient {
         );
 
         return Arrays.asList(response.getBody());
+    }
+
+    public HashMap<String, Integer> getDashboardData() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<HashMap<String, Integer>> response = restTemplate.exchange(
+                "http://localhost:8080/api/dashboard/data",
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<HashMap<String, Integer>>() {}
+        );
+
+        return response.getBody();
     }
 
 }
