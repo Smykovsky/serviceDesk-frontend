@@ -12,6 +12,7 @@ import pl.smyk.servicedeskfrontend.rest.AuthenticatorImpl;
 import pl.smyk.servicedeskfrontend.session.SessionManager;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -47,7 +48,10 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         viewManager = new ViewManager(this.contentAnchorPane);
-        viewManager.loadView("dashboard-view.fxml");
+        if (SessionManager.getInstance().getUserRoles().contains("OPERATOR")) {
+            viewManager.loadView("operatorDashboard-view.fxml");
+        } else  viewManager.loadView("userDashboard-view.fxml");
+
         initializeDashboardButton();
         initializeChartsButton();
         initializeUserPanelButton();
@@ -58,8 +62,13 @@ public class MainController implements Initializable {
 
     private void initializeDashboardButton() {
         dashboardButton.setOnAction((x) -> {
-            viewManager.loadView("dashboard-view.fxml");
-            System.out.println(SessionManager.getInstance().getUserRoles());
+            List<String> userRoles = SessionManager.getInstance().getUserRoles();
+            if (userRoles.contains("OPERATOR")) {
+                viewManager.loadView("operatorDashboard-view.fxml");
+            } else {
+                viewManager.loadView("userDashboard-view.fxml");
+            }
+
         });
     }
 

@@ -15,6 +15,7 @@ import pl.smyk.servicedeskfrontend.dto.UserCredentialsDto;
 import pl.smyk.servicedeskfrontend.factory.PopupFactory;
 import pl.smyk.servicedeskfrontend.rest.Authenticator;
 import pl.smyk.servicedeskfrontend.rest.AuthenticatorImpl;
+import pl.smyk.servicedeskfrontend.session.SessionManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -63,12 +64,14 @@ public class AuthController implements Initializable {
 
     private void authenticateUser() {
 //        UserCredentialsDto dto = new UserCredentialsDto(loginTextField.getText(), passwordTextField.getText());
-        UserCredentialsDto dto = new UserCredentialsDto("operator.operator", "12345678");
+        UserCredentialsDto dto = new UserCredentialsDto("test.est", "12345678");
             authenticator.authenticate(dto, (authenticationResult) -> {
                 System.out.println(authenticationResult);
                 Platform.runLater(() -> {
                     if (authenticationResult.getIsAuthenticated()) {
                         viewManager.loadScene("main-view.fxml");
+                    } else {
+                        System.out.println("Błąd");
                     }
                 });
             });

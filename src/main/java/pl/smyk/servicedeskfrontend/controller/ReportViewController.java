@@ -10,17 +10,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
 import pl.smyk.servicedeskfrontend.manager.ReportCardManager;
-import pl.smyk.servicedeskfrontend.rest.ReportRestClient;
+import pl.smyk.servicedeskfrontend.rest.OperatorRestClient;
 import pl.smyk.servicedeskfrontend.table.TableViewGenerator;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ReportViewController implements Initializable {
-  private final ReportRestClient reportRestClient;
+  private final OperatorRestClient operatorRestClient;
 
   @FXML
   private Pagination pagination;
@@ -32,7 +30,7 @@ public class ReportViewController implements Initializable {
   private TableViewGenerator<ReportDto> tableViewGenerator;
 
   public ReportViewController() {
-    reportRestClient = new ReportRestClient();
+    operatorRestClient = new OperatorRestClient();
     tableViewGenerator = new TableViewGenerator<>();
   }
   @Override

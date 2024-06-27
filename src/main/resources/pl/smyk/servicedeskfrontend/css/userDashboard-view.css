@@ -16,19 +16,9 @@
     -fx-background-color: grey;
 }
 
-.card-blue {
-    -fx-background-color: #0077b6;
-}
-
 .card-purple {
     -fx-background-color: purple;
 }
-
-.card-dark {
-    -fx-background-color: grey;
-}
-
-
 
 .card-label {
     -fx-padding: 0 0 0 15   ;

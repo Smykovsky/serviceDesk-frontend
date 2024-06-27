@@ -13,11 +13,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class ReportRestClient {
+public class OperatorRestClient {
     private static final String REPORTS_URL = "http://localhost:8080/api/report";
     private final RestTemplate restTemplate;
 
-    public ReportRestClient() {
+    public OperatorRestClient() {
         this.restTemplate = new RestTemplate();
     }
 

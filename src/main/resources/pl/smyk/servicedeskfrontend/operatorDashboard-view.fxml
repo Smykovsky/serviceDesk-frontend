@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardAnchorPane" prefHeight="768.0" prefWidth="824.0" stylesheets="@css/dashboard-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.DashboardController">
+<AnchorPane fx:id="dashboardAnchorPane" prefHeight="768.0" prefWidth="824.0" stylesheets="@css/dashboard-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.OperatorDashboardController">
    <children>
       <AnchorPane layoutX="12.0" layoutY="14.0" prefHeight="50.0" prefWidth="800.0">
          <children>
@@ -30,7 +30,7 @@
          <children>
             <Pane fx:id="allNotAssignedCard" layoutX="14.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                  <Label fx:id="allNotAssignedLabel" prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -44,7 +44,7 @@
             </Pane>
             <Pane fx:id="myNotClosedCard" layoutX="281.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                  <Label fx:id="allAssignedByUserLabel" prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -58,7 +58,7 @@
             </Pane>
             <Pane fx:id="myClosedCard" layoutX="564.0" layoutY="14.0" prefHeight="80.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                  <Label fx:id="allClosedByUserLabel" prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -72,7 +72,7 @@
             </Pane>
             <Pane fx:id="allAssignedCard" layoutX="14.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                  <Label fx:id="allAssignedLabel" prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -86,7 +86,7 @@
             </Pane>
             <Pane fx:id="myInProgressCard" layoutX="281.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                  <Label fx:id="inProgressLabel" prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -100,7 +100,7 @@
             </Pane>
             <Pane fx:id="allClosedCard" layoutX="564.0" layoutY="118.0" prefHeight="80.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
+                  <Label fx:id="allClosedLabel" prefHeight="50.0" prefWidth="200.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>

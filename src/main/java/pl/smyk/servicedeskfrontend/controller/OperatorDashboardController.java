@@ -1,83 +1,85 @@
 package pl.smyk.servicedeskfrontend.controller;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pl.smyk.servicedeskfrontend.MainApp;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
+import pl.smyk.servicedeskfrontend.factory.PopupFactory;
 import pl.smyk.servicedeskfrontend.manager.ReportCardManager;
 import pl.smyk.servicedeskfrontend.manager.ViewManager;
-import pl.smyk.servicedeskfrontend.rest.ReportRestClient;
+import pl.smyk.servicedeskfrontend.rest.OperatorRestClient;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
-public class DashboardController implements Initializable {
+public class OperatorDashboardController implements Initializable {
     @FXML
     private AnchorPane dashboardAnchorPane;
-
     @FXML
     private Pane allNotAssignedCard;
-
     @FXML
     private Pane myNotClosedCard;
-
     @FXML
     private Pane myClosedCard;
-
     @FXML
     private Pane allAssignedCard;
-
     @FXML
     private Pane myInProgressCard;
-
     @FXML
     private Pane allClosedCard;
-
     @FXML
     private Button addButton;
-
-
+    @FXML
+    private Label allNotAssignedLabel;
+    @FXML
+    private Label allAssignedByUserLabel;
+    @FXML
+    private Label allClosedByUserLabel;
+    @FXML
+    private Label allAssignedLabel;
+    @FXML
+    private Label inProgressLabel;
+    @FXML
+    private Label allClosedLabel;
     @FXML
     private LineChart<?, ?> lineChart;
-
     @FXML
     private CategoryAxis x;
-
     @FXML
     private NumberAxis y;
     private ViewManager viewManager;
     private HashMap<String, Integer> dashboardData;
+    private OperatorRestClient operatorRestClient;
+    private PopupFactory popupFactory;
 
-    private ReportRestClient reportRestClient;
-
-    public DashboardController () {
-        reportRestClient = new ReportRestClient();
+    public OperatorDashboardController() {
+        operatorRestClient = new OperatorRestClient();
+        popupFactory = new PopupFactory();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Thread thread = new Thread(() -> {
-            dashboardData = reportRestClient.getDashboardData();
-            System.out.println(dashboardData);
-        });
-
-        thread.start();
         viewManager = new ViewManager(this.dashboardAnchorPane);
+
+        initializeLabels();
         initializeAddButton();
         initializeLineChart();
     }
@@ -103,50 +105,84 @@ public class DashboardController implements Initializable {
 
     private void openAllNotAssignedReportsView() {
         allNotAssignedCard.setOnMouseClicked((x) -> {
-            List<ReportDto> reportDtoList = reportRestClient.getAllNotAssignedReports();
-            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
-            viewManager.loadView("reportsView/allNotAssignedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/allNotAssignedReports-view.fxml");
         });
     }
 
     private void openMyNotClosedReportsView() {
         myNotClosedCard.setOnMouseClicked((x) -> {
-            List<ReportDto> reportDtoList = reportRestClient.getMyNotClosedReports();
-            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
-            viewManager.loadView("reportsView/myNotClosedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/myNotClosedReports-view.fxml");
         });
     }
 
     private void openMyClosedReportsView() {
         myClosedCard.setOnMouseClicked((x) -> {
-            List<ReportDto> reportDtoList = reportRestClient.getMyAllClosedReports();
-            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
-            viewManager.loadView("reportsView/myClosedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/myClosedReports-view.fxml");
         });
     }
 
     private void openAllAssignedReportsView() {
         allAssignedCard.setOnMouseClicked(x -> {
-            List<ReportDto> reportDtoList = reportRestClient.getAllAssignedReports();
-            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
-            viewManager.loadView("reportsView/allAssignedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/allAssignedReports-view.fxml");
         });
     }
 
     private void openMyInProgressReportsView() {
         myInProgressCard.setOnMouseClicked((x) -> {
-            List<ReportDto> reportDtoList = reportRestClient.getMyInProgressReports();
-            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
-            viewManager.loadView("reportsView/myInProgressReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/myInProgressReports-view.fxml");
         });
     }
 
     private void openAllSolvedReportsView() {
         allClosedCard.setOnMouseClicked((x) -> {
-            List<ReportDto> reportDtoList = reportRestClient.getMyAllClosedReports();
-            ReportCardManager.getInstance().setReportDtoList(reportDtoList);
-            viewManager.loadView("reportsView/myClosedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/myClosedReports-view.fxml");
         });
+    }
+
+    private void loadReports(Supplier<List<ReportDto>> reportSupplier, String viewPath) {
+        Stage waitingPopup = popupFactory.createWaitingPopup("Loading data...");
+        waitingPopup.show();
+
+        CompletableFuture
+            .supplyAsync(reportSupplier::get)
+            .thenAccept(reportDtoList -> {
+                Platform.runLater(() -> {
+                    ReportCardManager.getInstance().setReportDtoList(reportDtoList);
+                    waitingPopup.close();
+                    viewManager.loadView(viewPath);
+                });
+        }).exceptionally(ex -> {
+            Platform.runLater(waitingPopup::close);
+            return null;
+        });
+    }
+
+    private void initializeLabels() {
+        Task<HashMap<String, Integer>> task = new Task<>() {
+            @Override
+            protected HashMap<String, Integer> call() {
+                return operatorRestClient.getDashboardData();
+            }
+            @Override
+            protected void succeeded() {
+                Platform.runLater(() -> {
+                    HashMap<String, Integer> data = getValue();
+                    allNotAssignedLabel.setText(String.valueOf(data.get("allNotAssigned")));
+                    allAssignedByUserLabel.setText(String.valueOf(data.get("allAssignedByUser")));
+                    allClosedByUserLabel.setText(String.valueOf(data.get("allClosedByUser")));
+                    allAssignedLabel.setText(String.valueOf(data.get("allAssigned")));
+                    inProgressLabel.setText(String.valueOf(data.get("allInProgressByUser")));
+                    allClosedLabel.setText(String.valueOf(data.get("allClosed")));
+                });
+            }
+
+            @Override
+            protected void failed() {
+                getException().printStackTrace();
+            }
+        };
+
+        new Thread(task).start();
     }
 
     private void initializeAddButton() {
