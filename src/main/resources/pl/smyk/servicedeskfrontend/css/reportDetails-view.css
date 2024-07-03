@@ -1,0 +1,29 @@
+.root-pane {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 20px;
+}
+
+.details-grid {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.label-header {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-padding: 5px;
+}
+
+.label-value {
+    -fx-font-size: 16px;
+    -fx-text-fill: #666666;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-padding: 5px;
+}

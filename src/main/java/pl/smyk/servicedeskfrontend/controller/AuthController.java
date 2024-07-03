@@ -64,7 +64,7 @@ public class AuthController implements Initializable {
 
     private void authenticateUser() {
 //        UserCredentialsDto dto = new UserCredentialsDto(loginTextField.getText(), passwordTextField.getText());
-        UserCredentialsDto dto = new UserCredentialsDto("test.est", "12345678");
+        UserCredentialsDto dto = new UserCredentialsDto("operator.operator", "12345678");
             authenticator.authenticate(dto, (authenticationResult) -> {
                 System.out.println(authenticationResult);
                 Platform.runLater(() -> {

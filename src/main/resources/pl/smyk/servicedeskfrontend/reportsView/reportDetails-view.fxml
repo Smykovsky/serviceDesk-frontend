@@ -2,26 +2,46 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="768.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.ReportDetailsController">
-            <Label layoutX="24.0" layoutY="222.0" text="ID:" />
-            <Label fx:id="idLabel" layoutX="81.0" layoutY="222.0" prefHeight="17.0" prefWidth="60.0" />
+<AnchorPane prefHeight="768.0" prefWidth="824.0" styleClass="root-pane" stylesheets="@../css/reportDetails-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.ReportDetailsController">
+    <GridPane layoutX="62.0" layoutY="14.0" prefHeight="500.0" prefWidth="700.0" styleClass="details-grid">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <Label prefHeight="71.0" prefWidth="351.0" styleClass="label-header" text="ID:" />
+            <Label fx:id="idLabel" prefHeight="71.0" prefWidth="351.0" styleClass="label-value" GridPane.columnIndex="1" />
 
-            <Label layoutX="16.0" layoutY="275.0" text="Tytuł:" />
-            <Label fx:id="titleLabel" layoutX="98.0" layoutY="275.0" prefHeight="17.0" prefWidth="102.0" />
+            <Label prefHeight="71.0" prefWidth="351.0" styleClass="label-header" text="Tytuł:" GridPane.rowIndex="1" />
 
-            <Label layoutX="17.0" layoutY="322.0" text="Opis:" />
-            <Label fx:id="descriptionLabel" layoutX="108.0" layoutY="322.0" prefHeight="17.0" prefWidth="95.0" />
+            <Label prefHeight="71.0" prefWidth="351.0" styleClass="label-header" text="Opis:" GridPane.rowIndex="2" />
+            <Label fx:id="titleLabel" prefHeight="71.0" prefWidth="351.0" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="descriptionLabel" prefHeight="71.0" prefWidth="351.0" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-            <Label layoutX="2.0" layoutY="376.0" text="Utworzone przez:" />
-            <Label fx:id="createdByLabel" layoutX="136.0" layoutY="376.0" prefHeight="17.0" prefWidth="128.0" />
+            <Label prefHeight="71.0" prefWidth="351.0" styleClass="label-header" text="Utworzone przez:" GridPane.rowIndex="3" />
 
-            <Label layoutX="8.0" layoutY="427.0" text="Przypisane użytkownikowi:" />
-            <Label fx:id="assignedUserLabel" layoutX="185.0" layoutY="427.0" prefHeight="17.0" prefWidth="128.0" />
+            <Label prefHeight="71.0" prefWidth="351.0" styleClass="label-header" text="Przypisane użytkownikowi:" GridPane.rowIndex="4" />
 
-            <Label layoutX="7.0" layoutY="493.0" text="Priorytet:" />
-            <Label fx:id="priorityLabel" layoutX="105.0" layoutY="493.0" prefHeight="17.0" prefWidth="102.0" />
+            <Label prefHeight="71.0" prefWidth="351.0" styleClass="label-header" text="Priorytet:" GridPane.rowIndex="5" />
 
-            <Label layoutX="12.0" layoutY="543.0" text="Status:" />
-            <Label fx:id="statusLabel" layoutX="125.0" layoutY="543.0" prefHeight="17.0" prefWidth="60.0" />
+            <Label prefHeight="71.0" prefWidth="351.0" styleClass="label-header" text="Status:" GridPane.rowIndex="6" />
+            <Label fx:id="statusLabel" prefHeight="71.0" prefWidth="351.0" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="priorityLabel" prefHeight="71.0" prefWidth="351.0" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="assignedUserLabel" prefHeight="71.0" prefWidth="351.0" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="createdByLabel" prefHeight="71.0" prefWidth="351.0" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        </children>
+    </GridPane>
 </AnchorPane>

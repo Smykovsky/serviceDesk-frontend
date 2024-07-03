@@ -80,7 +80,6 @@ public class OperatorDashboardController implements Initializable {
         viewManager = new ViewManager(this.dashboardAnchorPane);
 
         initializeLabels();
-        initializeAddButton();
         initializeLineChart();
     }
 
@@ -111,31 +110,31 @@ public class OperatorDashboardController implements Initializable {
 
     private void openMyNotClosedReportsView() {
         myNotClosedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/myNotClosedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getMyNotClosedReports(), "reportsView/myNotClosedReports-view.fxml");
         });
     }
 
     private void openMyClosedReportsView() {
         myClosedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/myClosedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getMyAllClosedReports(), "reportsView/myClosedReports-view.fxml");
         });
     }
 
     private void openAllAssignedReportsView() {
         allAssignedCard.setOnMouseClicked(x -> {
-            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/allAssignedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllAssignedReports(), "reportsView/allAssignedReports-view.fxml");
         });
     }
 
     private void openMyInProgressReportsView() {
         myInProgressCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/myInProgressReports-view.fxml");
+            loadReports(() -> operatorRestClient.getMyInProgressReports(), "reportsView/myInProgressReports-view.fxml");
         });
     }
 
     private void openAllSolvedReportsView() {
         allClosedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/myClosedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllSolvedReports(), "reportsView/myClosedReports-view.fxml");
         });
     }
 
@@ -183,22 +182,6 @@ public class OperatorDashboardController implements Initializable {
         };
 
         new Thread(task).start();
-    }
-
-    private void initializeAddButton() {
-        addButton.setOnAction((x) -> {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("addReportForm-view.fxml"));
-            try {
-                AnchorPane newPane = fxmlLoader.load();
-                Scene scene = new Scene(newPane);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.show();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
     }
 
     private Stage getStage() {
