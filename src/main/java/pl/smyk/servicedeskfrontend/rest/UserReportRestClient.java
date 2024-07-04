@@ -13,21 +13,37 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class OperatorRestClient {
+public class UserReportRestClient {
     private static final String REPORTS_URL = "http://localhost:8080/api/report";
     private final RestTemplate restTemplate;
 
-    public OperatorRestClient() {
+    public UserReportRestClient() {
         this.restTemplate = new RestTemplate();
     }
 
-    public List<ReportDto> getAllNotAssignedReports() {
+
+    public ResponseEntity<?> createReport(ReportDto dto) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
+        HttpEntity<?> entity = new HttpEntity<>(dto, headers);
+
+        ResponseEntity<ReportDto> response = restTemplate.exchange(
+                REPORTS_URL,
+                HttpMethod.POST,
+                entity,
+                ReportDto.class
+        );
+
+        return response;
+    }
+
+    public List<ReportDto> getMyNotAssignedReports() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
         HttpEntity<?> entity = new HttpEntity<>(headers);
 
         ResponseEntity<ReportDto[]> response = restTemplate.exchange(
-                REPORTS_URL + "/all/reports-notAssigned",
+                REPORTS_URL + "/notAssigned",
                 HttpMethod.GET,
                 entity,
                 ReportDto[].class
@@ -36,13 +52,13 @@ public class OperatorRestClient {
         return Arrays.asList(response.getBody());
     }
 
-    public List<ReportDto> getMyNotClosedReports() {
+    public List<ReportDto> getMyAssignedReports() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
         HttpEntity<?> entity = new HttpEntity<>(headers);
 
         ResponseEntity<ReportDto[]> response = restTemplate.exchange(
-                REPORTS_URL + "/user/reports-assigned",
+                REPORTS_URL + "/assigned",
                 HttpMethod.GET,
                 entity,
                 ReportDto[].class
@@ -51,58 +67,13 @@ public class OperatorRestClient {
         return Arrays.asList(response.getBody());
     }
 
-    public List<ReportDto> getMyAllClosedReports() {
+    public List<ReportDto> getMyClosedReports() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
         HttpEntity<?> entity = new HttpEntity<>(headers);
 
         ResponseEntity<ReportDto[]> response = restTemplate.exchange(
-                REPORTS_URL + "/user/reports-closed",
-                HttpMethod.GET,
-                entity,
-                ReportDto[].class
-        );
-
-        return Arrays.asList(response.getBody());
-    }
-
-    public List<ReportDto> getAllAssignedReports() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
-        HttpEntity<?> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<ReportDto[]> response = restTemplate.exchange(
-                REPORTS_URL + "/all/reports-assigned",
-                HttpMethod.GET,
-                entity,
-                ReportDto[].class
-        );
-
-        return Arrays.asList(response.getBody());
-    }
-
-    public List<ReportDto> getMyInProgressReports() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
-        HttpEntity<?> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<ReportDto[]> response = restTemplate.exchange(
-                REPORTS_URL + "/user/reports-inProgress",
-                HttpMethod.GET,
-                entity,
-                ReportDto[].class
-        );
-
-        return Arrays.asList(response.getBody());
-    }
-
-    public List<ReportDto> getAllSolvedReports() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
-        HttpEntity<?> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<ReportDto[]> response = restTemplate.exchange(
-                REPORTS_URL + "/all/reports-closed",
+                REPORTS_URL + "/closed",
                 HttpMethod.GET,
                 entity,
                 ReportDto[].class
@@ -124,20 +95,5 @@ public class OperatorRestClient {
         );
 
         return response.getBody();
-    }
-
-    public List<String> loadOperatorUsernames() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
-        HttpEntity<?> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<String[]> response = restTemplate.exchange(
-                "http://localhost:8080/api/operator",
-                HttpMethod.GET,
-                entity,
-                String[].class
-        );
-
-        return Arrays.asList(response.getBody());
     }
 }

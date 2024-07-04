@@ -104,37 +104,37 @@ public class OperatorDashboardController implements Initializable {
 
     private void openAllNotAssignedReportsView() {
         allNotAssignedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/allNotAssignedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/reportsTable-view.fxml");
         });
     }
 
     private void openMyNotClosedReportsView() {
         myNotClosedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getMyNotClosedReports(), "reportsView/myNotClosedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getMyNotClosedReports(), "reportsView/reportsTable-view.fxml");
         });
     }
 
     private void openMyClosedReportsView() {
         myClosedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getMyAllClosedReports(), "reportsView/myClosedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getMyAllClosedReports(), "reportsView/reportsTable-view.fxml");
         });
     }
 
     private void openAllAssignedReportsView() {
         allAssignedCard.setOnMouseClicked(x -> {
-            loadReports(() -> operatorRestClient.getAllAssignedReports(), "reportsView/allAssignedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllAssignedReports(), "reportsView/reportsTable-view.fxml");
         });
     }
 
     private void openMyInProgressReportsView() {
         myInProgressCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getMyInProgressReports(), "reportsView/myInProgressReports-view.fxml");
+            loadReports(() -> operatorRestClient.getMyInProgressReports(), "reportsView/reportsTable-view.fxml");
         });
     }
 
     private void openAllSolvedReportsView() {
         allClosedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getAllSolvedReports(), "reportsView/myClosedReports-view.fxml");
+            loadReports(() -> operatorRestClient.getAllSolvedReports(), "reportsView/reportsTable-view.fxml");
         });
     }
 

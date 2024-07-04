@@ -8,20 +8,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="addFormAnchorPane" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.AddReportController">
    <children>
       <Label layoutX="107.0" layoutY="14.0" text="Add Report">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="27.0" layoutY="68.0" prefHeight="26.0" prefWidth="250.0" />
-      <Label layoutX="27.0" layoutY="44.0" text="test" />
-      <Label layoutX="27.0" layoutY="111.0" text="test" />
-      <TextArea layoutX="26.0" layoutY="132.0" prefHeight="100.0" prefWidth="250.0" />
-      <ComboBox layoutX="27.0" layoutY="262.0" prefWidth="250.0" />
-      <Label layoutX="27.0" layoutY="241.0" text="test" />
-      <Button layoutX="102.0" layoutY="323.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add" />
+      <TextField fx:id="titleField" layoutX="27.0" layoutY="68.0" prefHeight="26.0" prefWidth="250.0" />
+      <Label layoutX="27.0" layoutY="51.0" text="Title" />
+      <Button fx:id="addButton" layoutX="102.0" layoutY="323.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add" />
+      <Label layoutX="27.0" layoutY="94.0" text="Description" />
+      <TextArea fx:id="descriptionArea" layoutX="27.0" layoutY="111.0" prefHeight="105.0" prefWidth="250.0" />
+      <ComboBox fx:id="priorityComboBox" layoutX="24.0" layoutY="233.0" prefWidth="250.0" />
+      <Label layoutX="24.0" layoutY="216.0" text="Priority" />
    </children>
 </AnchorPane>

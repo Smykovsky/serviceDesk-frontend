@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="824.0" stylesheets="@css/userDashboard-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="userDashboardAnchorPane" prefHeight="768.0" prefWidth="824.0" stylesheets="@css/userDashboard-view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.UserDashboardController">
    <children>
       <AnchorPane layoutX="22.0" layoutY="24.0" prefHeight="50.0" prefWidth="800.0">
          <children>
@@ -27,7 +27,7 @@
          <children>
             <Pane fx:id="myNotAssignedCard" layoutX="33.0" layoutY="14.0" prefHeight="90.0" prefWidth="350.0">
                <children>
-                  <Label fx:id="allAssignedByUserLabel" prefHeight="50.0" prefWidth="350.0" styleClass="card-label" text="13">
+                  <Label fx:id="myNotAssignedLabel" prefHeight="50.0" prefWidth="350.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -41,7 +41,7 @@
             </Pane>
             <Pane fx:id="myAssignedCard" layoutX="417.0" layoutY="14.0" prefHeight="90.0" prefWidth="350.0">
                <children>
-                  <Label fx:id="allAssignedByUserLabel1" prefHeight="50.0" prefWidth="350.0" styleClass="card-label" text="13">
+                  <Label fx:id="myAssignedLabel" prefHeight="50.0" prefWidth="350.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -55,7 +55,7 @@
             </Pane>
             <Pane fx:id="myClosedCard" layoutX="33.0" layoutY="125.0" prefHeight="90.0" prefWidth="735.0">
                <children>
-                  <Label fx:id="allClosedByUserLabel" prefHeight="50.0" prefWidth="735.0" styleClass="card-label" text="13">
+                  <Label fx:id="myClosedLabel" prefHeight="50.0" prefWidth="735.0" styleClass="card-label" text="13">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
