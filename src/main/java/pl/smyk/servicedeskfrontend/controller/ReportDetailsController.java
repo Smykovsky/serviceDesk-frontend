@@ -1,10 +1,8 @@
 package pl.smyk.servicedeskfrontend.controller;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +12,7 @@ import javafx.stage.Stage;
 import pl.smyk.servicedeskfrontend.MainApp;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
 import pl.smyk.servicedeskfrontend.manager.ViewManager;
+import pl.smyk.servicedeskfrontend.session.SessionManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +25,8 @@ public class ReportDetailsController implements Initializable{
     private Button closeButton;
     @FXML
     private Button assignButton;
+    @FXML
+    private Button leaveButton;
     @FXML
     private Label idLabel;
     @FXML
@@ -43,7 +44,6 @@ public class ReportDetailsController implements Initializable{
 
     private ViewManager viewManager;
 
-
     public void setReportDetails(ReportDto report) {
         idLabel.setText(String.valueOf(report.getId()));
         titleLabel.setText(report.getTitle());
@@ -57,8 +57,15 @@ public class ReportDetailsController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         viewManager = new ViewManager(this.reportDetailsAnchorPane);
+
+        if (!SessionManager.getInstance().getUserRoles().contains("OPERATOR")) {
+            assignButton.setVisible(false);
+            closeButton.setVisible(false);
+        }
+
         initializeAssignButton();
         initializeCloseButton();
+        initializeLeaveButton();
     }
 
 
@@ -80,9 +87,19 @@ public class ReportDetailsController implements Initializable{
         });
     }
 
+    private void initializeLeaveButton() {
+        leaveButton.setOnAction(x -> {
+            if (SessionManager.getInstance().getUserRoles().contains("OPERATOR")) {
+                viewManager.loadView("operatorDashboard-view.fxml");
+            } else {
+                viewManager.loadView("userDashboard-view.fxml");
+            }
+        });
+    }
+
     private void initializeCloseButton() {
         closeButton.setOnAction(x -> {
-            getStage().close();
+            //handle close report
         });
     }
 

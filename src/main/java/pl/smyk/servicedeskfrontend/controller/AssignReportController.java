@@ -1,16 +1,23 @@
 package pl.smyk.servicedeskfrontend.controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import pl.smyk.servicedeskfrontend.MainApp;
+import pl.smyk.servicedeskfrontend.dto.AssignReportRequest;
+import pl.smyk.servicedeskfrontend.manager.ViewManager;
 import pl.smyk.servicedeskfrontend.rest.OperatorRestClient;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -48,7 +55,15 @@ public class AssignReportController implements Initializable {
 
     private void initializeSaveButton() {
         saveButton.setOnAction(event -> {
-
+            String selectedOperator = operatorComboBox.getSelectionModel().getSelectedItem();
+            AssignReportRequest dto = new AssignReportRequest(selectedReportId, selectedOperator);
+            Thread thread = new Thread(() -> {
+                operatorRestClient.assignReportToOperator(dto);
+                Platform.runLater(() -> {
+                    getStage().close();
+                });
+            });
+            thread.start();
         });
     }
 

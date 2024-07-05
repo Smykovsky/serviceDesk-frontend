@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import pl.smyk.servicedeskfrontend.dto.AssignReportRequest;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
 import pl.smyk.servicedeskfrontend.session.SessionManager;
 
@@ -139,5 +140,20 @@ public class OperatorRestClient {
         );
 
         return Arrays.asList(response.getBody());
+    }
+
+    public ResponseEntity<?> assignReportToOperator(AssignReportRequest dto) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
+        HttpEntity<?> entity = new HttpEntity<>(dto, headers);
+
+        ResponseEntity<?> response = restTemplate.exchange(
+                REPORTS_URL + "/assign",
+                HttpMethod.POST,
+                entity,
+                ResponseEntity.class
+        );
+
+        return response;
     }
 }

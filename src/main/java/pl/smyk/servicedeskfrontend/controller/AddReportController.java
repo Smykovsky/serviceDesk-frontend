@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import org.springframework.http.ResponseEntity;
 import pl.smyk.servicedeskfrontend.MainApp;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
+import pl.smyk.servicedeskfrontend.factory.PopupFactory;
 import pl.smyk.servicedeskfrontend.rest.UserReportRestClient;
 
 import java.io.IOException;
@@ -34,9 +35,11 @@ public class AddReportController implements Initializable {
     @FXML
     private ComboBox<String> priorityComboBox;
     private final UserReportRestClient userReportRestClient;
+    private final PopupFactory popupFactory;
 
     public AddReportController() {
         userReportRestClient = new UserReportRestClient();
+        popupFactory = new PopupFactory();
     }
 
     @Override
@@ -58,15 +61,23 @@ public class AddReportController implements Initializable {
             dto.setPriority(priorityComboBox.getSelectionModel().getSelectedItem());
             System.out.println(priorityComboBox.getSelectionModel().getSelectedItem());
 
-            Thread thread = new Thread(() -> {
-                userReportRestClient.createReport(dto);
+            if (dto.getTitle() == null || dto.getTitle().isEmpty() ||
+                    dto.getDescription() == null || dto.getDescription().isEmpty() ||
+                    dto.getPriority() == null || dto.getPriority().isEmpty()) {
+
                 Platform.runLater(() -> {
-                    getStage().close();
+                    Stage infoPopup = popupFactory.createInfoPopup("Please fill all fields!");
+                    infoPopup.show();
                 });
-            });
-            thread.start();
-
-
+            } else {
+                Thread thread = new Thread(() -> {
+                    userReportRestClient.createReport(dto);
+                    Platform.runLater(() -> {
+                        getStage().close();
+                    });
+                });
+                thread.start();
+            }
         });
     }
 

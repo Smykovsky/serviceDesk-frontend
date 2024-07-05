@@ -1,6 +1,7 @@
 package pl.smyk.servicedeskfrontend.manager;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -9,6 +10,7 @@ import pl.smyk.servicedeskfrontend.MainApp;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.Stack;
 
 public class ViewManager {
     private AnchorPane container;
@@ -38,6 +40,16 @@ public class ViewManager {
             stage.setTitle("Service Desk");
             primaryStage.close();
             stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void reloadView(String fxmlFile) {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource(fxmlFile));
+        try {
+            Parent newPane = fxmlLoader.load();
+            container.getChildren().setAll(newPane);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
