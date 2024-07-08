@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Stack;
 
 
 @Getter @Setter
@@ -14,6 +15,7 @@ public class SessionManager {
     private String accessToken;
     private String refreshToken;
     private List<String> userRoles;
+    private Stack<String> viewHistory = new Stack<>();
 
     private SessionManager() {
 

@@ -47,8 +47,6 @@ public class OperatorDashboardController implements Initializable {
     @FXML
     private Pane allClosedCard;
     @FXML
-    private Button addButton;
-    @FXML
     private Label allNotAssignedLabel;
     @FXML
     private Label allAssignedByUserLabel;

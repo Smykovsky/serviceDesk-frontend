@@ -156,4 +156,19 @@ public class OperatorRestClient {
 
         return response;
     }
+
+    public ResponseEntity<?> closeReport(Long reportId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
+        HttpEntity<?> entity = new HttpEntity<>(reportId, headers);
+
+        ResponseEntity<?> response = restTemplate.exchange(
+                REPORTS_URL + "/close",
+                HttpMethod.POST,
+                entity,
+                ResponseEntity.class
+        );
+
+        return response;
+    }
 }

@@ -6,7 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lombok.Getter;
 import pl.smyk.servicedeskfrontend.MainApp;
+import pl.smyk.servicedeskfrontend.session.SessionManager;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -14,15 +16,19 @@ import java.util.Stack;
 
 public class ViewManager {
     private AnchorPane container;
+    @Getter
+    private final Stack<String> viewHistory;
 
     public ViewManager(AnchorPane container) {
         this.container = container;
+        this.viewHistory = new Stack<>();
     }
 
     public void loadView(String fxmlFile) {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource(fxmlFile));
         try {
             AnchorPane newPane = fxmlLoader.load();
+            saveCurrentView(fxmlFile);
             container.getChildren().clear();
             container.getChildren().add(newPane);
         } catch (IOException e) {
@@ -61,6 +67,7 @@ public class ViewManager {
             AnchorPane newPane = fxmlLoader.load();
             Scene scene = new Scene(newPane);
             Stage stage = new Stage();
+            saveCurrentView(fxmlFile);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
@@ -82,5 +89,26 @@ public class ViewManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void goBack() {
+        if (!SessionManager.getInstance().getViewHistory().isEmpty()) {
+            SessionManager.getInstance().getViewHistory().pop();
+            String previousView = SessionManager.getInstance().getViewHistory().peek();
+            System.out.println("previousView: " +previousView);
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource(previousView));
+            try {
+                Parent previousPane = fxmlLoader.load();
+                container.getChildren().clear();
+                container.getChildren().add(previousPane);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void saveCurrentView(String currentFxmlFile) {
+        SessionManager.getInstance().getViewHistory().push(currentFxmlFile);
+        System.out.println(SessionManager.getInstance().getViewHistory());
     }
 }

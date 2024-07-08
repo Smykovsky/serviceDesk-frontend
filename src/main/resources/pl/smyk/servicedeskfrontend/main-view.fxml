@@ -2,9 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@css/main-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.MainController">
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" stylesheets="@css/main-view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.MainController">
    <children>
       <AnchorPane fx:id="menuAnchorPane" prefHeight="768.0" prefWidth="200.0" styleClass="menu">
          <children>
@@ -13,7 +12,7 @@
             <Button fx:id="userPanelButton" layoutX="42.0" layoutY="292.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="User Panel" />
             <Button fx:id="view1Button3" layoutX="42.0" layoutY="367.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="view1" />
             <Button fx:id="logoutButton" layoutX="38.0" layoutY="543.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="Logout" />
-            <Circle fill="DODGERBLUE" layoutX="100.0" layoutY="57.0" radius="34.0" stroke="BLACK" strokeType="INSIDE" />
+            <Button fx:id="previousViewButton" layoutX="74.0" layoutY="35.0" mnemonicParsing="false" styleClass="btn" text="←" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="contentAnchorPane" layoutX="200.0" prefHeight="768.0" prefWidth="824.0" stylesheets="@css/main-view.css" />

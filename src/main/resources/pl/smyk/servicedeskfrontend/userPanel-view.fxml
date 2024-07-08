@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="824.0" stylesheets="@css/userPanel-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="userPanelAnchorPane" prefHeight="768.0" prefWidth="824.0" stylesheets="@css/userPanel-view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.UserPanelController">
     <children>
         <Label layoutX="40.0" layoutY="20.0" styleClass="header-label" text="Profil Użytkownika">
             <font>

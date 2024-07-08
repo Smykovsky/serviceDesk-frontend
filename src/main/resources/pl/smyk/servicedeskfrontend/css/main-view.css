@@ -29,3 +29,12 @@
     -fx-border-color: #2980b9;
     -fx-border-width: 2px;
 }
+
+.btn {
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-color: #2980b9;
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}

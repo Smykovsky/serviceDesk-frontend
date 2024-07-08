@@ -3,6 +3,7 @@ package pl.smyk.servicedeskfrontend.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.springframework.web.client.RestTemplate;
@@ -37,7 +38,8 @@ public class MainController implements Initializable {
 
     @FXML
     private Button logoutButton;
-
+    @FXML
+    private Button previousViewButton;
     private ViewManager viewManager;
 
     public MainController() {
@@ -56,8 +58,14 @@ public class MainController implements Initializable {
         initializeChartsButton();
         initializeUserPanelButton();
         initializeLogoutButton();
+        initializePresiousViewButton();
     }
 
+    private void initializePresiousViewButton() {
+        previousViewButton.setOnMouseClicked(x -> {
+            viewManager.goBack();
+        });
+    }
 
 
     private void initializeDashboardButton() {

@@ -54,6 +54,10 @@ public class ReportDetailsController implements Initializable{
         statusLabel.setText(report.getStatus());
     }
 
+    public void setAssignedUserLabel(String assignedUser) {
+        assignedUserLabel.setText(assignedUser);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         viewManager = new ViewManager(this.reportDetailsAnchorPane);
@@ -89,17 +93,31 @@ public class ReportDetailsController implements Initializable{
 
     private void initializeLeaveButton() {
         leaveButton.setOnAction(x -> {
-            if (SessionManager.getInstance().getUserRoles().contains("OPERATOR")) {
-                viewManager.loadView("operatorDashboard-view.fxml");
-            } else {
-                viewManager.loadView("userDashboard-view.fxml");
-            }
+            System.out.println(SessionManager.getInstance().getViewHistory());
+            viewManager.goBack();
+//            if (SessionManager.getInstance().getUserRoles().contains("OPERATOR")) {
+//                viewManager.loadView("operatorDashboard-view.fxml");
+//            } else {
+//                viewManager.loadView("userDashboard-view.fxml");
+//            }
         });
     }
 
     private void initializeCloseButton() {
         closeButton.setOnAction(x -> {
-            //handle close report
+            try {
+                FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("closeReport-view.fxml"));
+                AnchorPane root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                CloseReportController controller = loader.getController();
+                controller.setReportId(Long.valueOf(idLabel.getText()));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
     }
 

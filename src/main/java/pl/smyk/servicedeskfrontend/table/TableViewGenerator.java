@@ -14,6 +14,7 @@ import pl.smyk.servicedeskfrontend.MainApp;
 import pl.smyk.servicedeskfrontend.controller.ReportDetailsController;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
 import pl.smyk.servicedeskfrontend.manager.ViewManager;
+import pl.smyk.servicedeskfrontend.session.SessionManager;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -53,6 +54,8 @@ public class TableViewGenerator <T> {
                 if (!row.isEmpty() && event.getClickCount() == 1) {
                     T clickedRow = row.getItem();
                     System.out.println("Selected: " + clickedRow.toString());
+                    SessionManager.getInstance().getViewHistory().push("reportsView/reportsTable-view.fxml");
+                    System.out.println(SessionManager.getInstance().getViewHistory());
                     openDetailView((ReportDto) clickedRow, mainAnchorPane);
                 }
             });

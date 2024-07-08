@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
@@ -37,6 +38,7 @@ public class AssignReportController implements Initializable {
     private Button saveButton;
     private final OperatorRestClient operatorRestClient;
     private Long selectedReportId;
+    private ViewManager viewManager;
 
     public AssignReportController() {
         operatorRestClient = new OperatorRestClient();
@@ -48,6 +50,7 @@ public class AssignReportController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        viewManager = new ViewManager(assignReportFormAnchorPane);
         initializeComboBox();
         initializeSaveButton();
         initializeCloseButton();
