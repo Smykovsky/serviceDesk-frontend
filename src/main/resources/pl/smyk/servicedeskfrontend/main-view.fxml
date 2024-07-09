@@ -8,9 +8,8 @@
       <AnchorPane fx:id="menuAnchorPane" prefHeight="768.0" prefWidth="200.0" styleClass="menu">
          <children>
             <Button fx:id="dashboardButton" layoutX="42.0" layoutY="136.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="Dashboard" />
-            <Button fx:id="chartsButton" layoutX="42.0" layoutY="212.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="Charts" />
+            <Button fx:id="chartsButton" layoutX="42.0" layoutY="212.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="Articles" />
             <Button fx:id="userPanelButton" layoutX="42.0" layoutY="292.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="User Panel" />
-            <Button fx:id="view1Button3" layoutX="42.0" layoutY="367.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="view1" />
             <Button fx:id="logoutButton" layoutX="38.0" layoutY="543.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="menu-button" text="Logout" />
             <Button fx:id="previousViewButton" layoutX="74.0" layoutY="35.0" mnemonicParsing="false" styleClass="btn" text="←" />
          </children>

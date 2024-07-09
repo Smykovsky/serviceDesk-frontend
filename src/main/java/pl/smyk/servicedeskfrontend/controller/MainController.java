@@ -82,7 +82,7 @@ public class MainController implements Initializable {
 
     private void initializeChartsButton() {
         chartsButton.setOnAction((x) -> {
-            viewManager.loadView("charts-view.fxml");
+            viewManager.loadView("articles-view.fxml");
         });
     }
 
