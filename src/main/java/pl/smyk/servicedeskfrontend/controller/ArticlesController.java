@@ -4,12 +4,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import pl.smyk.servicedeskfrontend.MainApp;
 import pl.smyk.servicedeskfrontend.dto.ArticleDto;
+import pl.smyk.servicedeskfrontend.manager.ViewManager;
 import pl.smyk.servicedeskfrontend.rest.ArticleRestClient;
 
 import java.io.IOException;
@@ -22,8 +24,11 @@ public class ArticlesController implements Initializable {
     private AnchorPane articlesAnchorPane;
     @FXML
     private ScrollPane contentScrollPane;
+    @FXML
+    private Button addButton;
 
     private final ArticleRestClient articleRestClient;
+    private ViewManager viewManager;
 
     public ArticlesController() {
         articleRestClient = new ArticleRestClient();
@@ -31,6 +36,8 @@ public class ArticlesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        viewManager = new ViewManager(articlesAnchorPane);
+        initializeAddButton();
         List<ArticleDto> articles = fetchArticles();
         VBox content = new VBox();
         content.getStyleClass().add("content-hbox");
@@ -49,6 +56,12 @@ public class ArticlesController implements Initializable {
         }
 
         contentScrollPane.setContent(content);
+    }
+
+    private void initializeAddButton() {
+        addButton.setOnAction(x -> {
+            viewManager.loadNewWindow("addArticle-view.fxml");
+        });
     }
 
     private List<ArticleDto> fetchArticles() {

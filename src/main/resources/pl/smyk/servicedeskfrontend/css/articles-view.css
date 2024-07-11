@@ -39,3 +39,9 @@
     -fx-border-radius: 3;
     -fx-background-radius: 3;
 }
+
+.btn {
+    -fx-text-fill: white;
+    -fx-background-color: green;
+    -fx-font-size: 14px;
+}

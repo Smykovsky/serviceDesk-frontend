@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import pl.smyk.servicedeskfrontend.dto.ArticleDto;
 import pl.smyk.servicedeskfrontend.dto.AssignReportRequest;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
 import pl.smyk.servicedeskfrontend.session.SessionManager;
@@ -167,6 +168,36 @@ public class OperatorRestClient {
                 HttpMethod.POST,
                 entity,
                 ResponseEntity.class
+        );
+
+        return response;
+    }
+
+    public ResponseEntity<?> addArticle(ArticleDto dto) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
+        HttpEntity<?> entity = new HttpEntity<>(dto, headers);
+
+        ResponseEntity<ArticleDto> response = restTemplate.exchange(
+                "http://localhost:8080/api/article",
+                HttpMethod.POST,
+                entity,
+                ArticleDto.class
+        );
+
+        return response;
+    }
+
+    public ResponseEntity<?> updateArticle(ArticleDto dto) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
+        HttpEntity<?> entity = new HttpEntity<>(dto, headers);
+
+        ResponseEntity<ArticleDto> response = restTemplate.exchange(
+                "http://localhost:8080/api/article",
+                HttpMethod.PUT,
+                entity,
+                ArticleDto.class
         );
 
         return response;
