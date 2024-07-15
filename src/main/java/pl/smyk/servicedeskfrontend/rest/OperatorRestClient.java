@@ -1,12 +1,12 @@
 package pl.smyk.servicedeskfrontend.rest;
 
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import pl.smyk.servicedeskfrontend.dto.ArticleDto;
+import pl.smyk.servicedeskfrontend.dto.ArticleRequest;
 import pl.smyk.servicedeskfrontend.dto.AssignReportRequest;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
 import pl.smyk.servicedeskfrontend.session.SessionManager;
@@ -173,10 +173,20 @@ public class OperatorRestClient {
         return response;
     }
 
-    public ResponseEntity<?> addArticle(ArticleDto dto) {
+    public ResponseEntity<?> addArticle(ArticleRequest dto) {
         HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
         headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
-        HttpEntity<?> entity = new HttpEntity<>(dto, headers);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("title", dto.getTitle());
+        body.add("description", dto.getDescription());
+
+        if (dto.getFile() != null) {
+            body.add("file", dto.getFile());
+        }
+
+        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
 
         ResponseEntity<ArticleDto> response = restTemplate.exchange(
                 "http://localhost:8080/api/article",

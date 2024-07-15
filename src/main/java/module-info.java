@@ -12,6 +12,8 @@ module pl.smyk.servicedeskfrontend {
     requires org.apache.pdfbox;
     requires org.apache.pdfbox.tools;
     requires javafx.swing;
+    requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.core;
 
     opens pl.smyk.servicedeskfrontend to javafx.fxml;
     exports pl.smyk.servicedeskfrontend.dto;
