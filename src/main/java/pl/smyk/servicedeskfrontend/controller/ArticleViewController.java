@@ -3,12 +3,13 @@ package pl.smyk.servicedeskfrontend.controller;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -25,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 public class ArticleViewController implements Initializable {
     @FXML
@@ -47,6 +49,7 @@ public class ArticleViewController implements Initializable {
     private VBox commentsBox;
     private ViewManager viewManager;
     private String pathToFile;
+    private int currentPageIndex = 0;
 
     public void initData(ArticleDto article) {
         titleLabel.setText("Title: " + article.getTitle());
@@ -108,29 +111,37 @@ public class ArticleViewController implements Initializable {
         pdfStage.show();
 
         int numPages = images.length;
-        final int[] currentPageIndex = {0};
 
         Label prevButton = new Label("<- Previous");
-        prevButton.setStyle("-fx-text-fill: red; -fx-padding: 10; -fx-font-size: 14px");
-        prevButton.setOnMouseClicked(event -> {
-            if (currentPageIndex[0] > 0) {
-                currentPageIndex[0]--;
-                imageView.setImage(images[currentPageIndex[0]]);
-            }
-        });
-
+        prevButton.setVisible(false);
         Label nextButton = new Label("Next ->");
-        nextButton.setStyle("-fx-text-fill: green; -fx-padding: 10;-fx-font-size: 14px");
-        nextButton.setOnMouseClicked(event -> {
-            if (currentPageIndex[0] < numPages - 1) {
-                currentPageIndex[0]++;
-                imageView.setImage(images[currentPageIndex[0]]);
+        prevButton.setStyle("-fx-text-fill: white; -fx-background-color: red; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5; -fx-font-size: 14px; -fx-font-weight: bold");
+        prevButton.setOnMouseClicked(event -> {
+            if (currentPageIndex > 0) {
+                currentPageIndex--;
+                imageView.setImage(images[currentPageIndex]);
+                prevButton.setVisible(currentPageIndex > 0);
+                nextButton.setVisible(currentPageIndex < numPages - 1);
             }
         });
 
-        VBox buttonBox = new VBox( prevButton, nextButton);
-        stackPane.getChildren().add(buttonBox);
 
-        StackPane.setAlignment(buttonBox, javafx.geometry.Pos.BOTTOM_CENTER);
+        nextButton.setStyle("-fx-text-fill: white; -fx-background-color: green; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5;-fx-font-size: 14px; -fx-font-weight: bold");
+        nextButton.setOnMouseClicked(event -> {
+            if (currentPageIndex < numPages - 1) {
+                currentPageIndex++;
+                imageView.setImage(images[currentPageIndex]);
+                prevButton.setVisible(currentPageIndex > 0);
+                nextButton.setVisible(currentPageIndex < numPages - 1);
+            }
+        });
+
+        Insets insets = new Insets(10);
+        stackPane.getChildren().addAll(prevButton, nextButton);
+
+        StackPane.setMargin(prevButton, insets);
+        StackPane.setMargin(nextButton, insets);
+        StackPane.setAlignment(prevButton, Pos.TOP_LEFT);
+        StackPane.setAlignment(nextButton, Pos.TOP_RIGHT);
     }
 }
