@@ -8,6 +8,10 @@ module pl.smyk.servicedeskfrontend {
     requires spring.web;
     requires java.jwt;
     requires spring.core;
+    requires java.desktop;
+    requires org.apache.pdfbox;
+    requires org.apache.pdfbox.tools;
+    requires javafx.swing;
 
     opens pl.smyk.servicedeskfrontend to javafx.fxml;
     exports pl.smyk.servicedeskfrontend.dto;
