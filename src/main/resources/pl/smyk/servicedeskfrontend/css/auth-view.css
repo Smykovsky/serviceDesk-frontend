@@ -27,12 +27,14 @@
     -fx-text-fill: #003366;
     -fx-background-color: #C7C7C7;
     -fx-border-color: #003366;
-    -fx-background-radius: 0;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
 }
 
 
 .login-button:hover {
     -fx-background-color: #1A4D80;
+    -fx-text-fill: white;
 }
 
 .textField {

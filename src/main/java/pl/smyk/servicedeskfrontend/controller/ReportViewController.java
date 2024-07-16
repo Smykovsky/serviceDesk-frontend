@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -22,9 +23,10 @@ public class ReportViewController implements Initializable {
 
   @FXML
   private Pagination pagination;
-
   @FXML
   private AnchorPane mainAnchorPane;
+  @FXML
+  private Label headerLabel;
   private static final int ROWS_PER_PAGE = 24;
   private ObservableList<ReportDto> reportObservableList;
   private TableViewGenerator<ReportDto> tableViewGenerator;
@@ -33,6 +35,16 @@ public class ReportViewController implements Initializable {
     operatorRestClient = new OperatorRestClient();
     tableViewGenerator = new TableViewGenerator<>();
   }
+
+  public void setLabel(String label) {
+    if (this.headerLabel == null) {
+      System.out.println("headerLabel is null");
+    } else {
+      System.out.println("Setting label to: " + label);
+      this.headerLabel.setText(label);
+    }
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     Thread thread = new Thread(() -> {

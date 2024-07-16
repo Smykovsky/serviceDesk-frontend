@@ -5,10 +5,7 @@ import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import pl.smyk.servicedeskfrontend.dto.ArticleDto;
-import pl.smyk.servicedeskfrontend.dto.ArticleRequest;
-import pl.smyk.servicedeskfrontend.dto.AssignReportRequest;
-import pl.smyk.servicedeskfrontend.dto.ReportDto;
+import pl.smyk.servicedeskfrontend.dto.*;
 import pl.smyk.servicedeskfrontend.session.SessionManager;
 
 import java.util.Arrays;
@@ -198,16 +195,16 @@ public class OperatorRestClient {
         return response;
     }
 
-    public ResponseEntity<?> updateArticle(ArticleDto dto) {
+    public ResponseEntity<?> updateArticle(ArticleDto articleDto) {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
-        HttpEntity<?> entity = new HttpEntity<>(dto, headers);
+        HttpEntity<?> entity = new HttpEntity<>(articleDto, headers);
 
-        ResponseEntity<ArticleDto> response = restTemplate.exchange(
+        ResponseEntity<?> response = restTemplate.exchange(
                 "http://localhost:8080/api/article",
                 HttpMethod.PUT,
                 entity,
-                ArticleDto.class
+                String.class
         );
 
         return response;

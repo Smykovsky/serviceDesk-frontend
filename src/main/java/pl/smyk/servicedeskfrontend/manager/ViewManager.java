@@ -29,8 +29,7 @@ public class ViewManager {
         try {
             AnchorPane newPane = fxmlLoader.load();
             saveCurrentView(fxmlFile);
-            container.getChildren().clear();
-            container.getChildren().add(newPane);
+            container.getChildren().setAll(newPane);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -95,7 +94,7 @@ public class ViewManager {
         if (!SessionManager.getInstance().getViewHistory().isEmpty()) {
             SessionManager.getInstance().getViewHistory().pop();
             String previousView = SessionManager.getInstance().getViewHistory().peek();
-            System.out.println("previousView: " +previousView);
+            System.out.println("previousView: " + previousView);
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource(previousView));
             try {
                 Parent previousPane = fxmlLoader.load();
@@ -107,7 +106,7 @@ public class ViewManager {
         }
     }
 
-    private void saveCurrentView(String currentFxmlFile) {
+    public void saveCurrentView(String currentFxmlFile) {
         SessionManager.getInstance().getViewHistory().push(currentFxmlFile);
         System.out.println(SessionManager.getInstance().getViewHistory());
     }

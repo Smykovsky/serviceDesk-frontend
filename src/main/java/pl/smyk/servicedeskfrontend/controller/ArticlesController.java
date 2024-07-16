@@ -60,7 +60,7 @@ public class ArticlesController implements Initializable {
 
     private void initializeAddButton() {
         addButton.setOnAction(x -> {
-            viewManager.loadNewWindow("addArticle-view.fxml");
+            viewManager.loadNewWindow("article/addArticle-view.fxml");
         });
     }
 
@@ -109,7 +109,7 @@ public class ArticlesController implements Initializable {
 
     private void openArticleView(ArticleDto article) {
         try {
-            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("article-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("article/article-view.fxml"));
             Parent root = loader.load();
 
             ArticleViewController controller = loader.getController();

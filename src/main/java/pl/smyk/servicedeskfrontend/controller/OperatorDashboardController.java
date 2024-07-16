@@ -5,13 +5,12 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -59,15 +58,12 @@ public class OperatorDashboardController implements Initializable {
     @FXML
     private Label allClosedLabel;
     @FXML
-    private LineChart<?, ?> lineChart;
+    private PieChart pieChart;
     @FXML
-    private CategoryAxis x;
-    @FXML
-    private NumberAxis y;
     private ViewManager viewManager;
-    private HashMap<String, Integer> dashboardData;
     private OperatorRestClient operatorRestClient;
     private PopupFactory popupFactory;
+    private HashMap<String, Integer> dashboardData;
 
     public OperatorDashboardController() {
         operatorRestClient = new OperatorRestClient();
@@ -77,81 +73,96 @@ public class OperatorDashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         viewManager = new ViewManager(this.dashboardAnchorPane);
 
-        initializeLabels();
-        initializeLineChart();
-    }
-
-
-    private void initializeLineChart() {
-        XYChart.Series series = new XYChart.Series();
-        series.setName("Solve reports");
-
-        series.getData().add(new XYChart.Data("2024-01-01", 23));
-        series.getData().add(new XYChart.Data("2024-02-01", 11));
-        series.getData().add(new XYChart.Data("2024-03-01", 13));
-        series.getData().add(new XYChart.Data("2024-04-01", 5));
-
-        lineChart.getData().addAll(series);
         openAllNotAssignedReportsView();
         openMyNotClosedReportsView();
         openMyClosedReportsView();
         openAllAssignedReportsView();
         openMyInProgressReportsView();
         openAllSolvedReportsView();
+        initializeLabels();
+    }
+
+    private void initializePieChart() {
+        PieChart.Data solvedData = new PieChart.Data("All solved", dashboardData.get("allClosed"));
+        PieChart.Data notAssignedData = new PieChart.Data("All not assigned", dashboardData.get("allNotAssigned"));
+        PieChart.Data myAlLClosed = new PieChart.Data("My closed", dashboardData.get("allClosedByUser"));
+        PieChart.Data myNotClosed = new PieChart.Data("My not closed", dashboardData.get("allAssignedByUser"));
+
+        pieChart.getData().addAll(solvedData, notAssignedData, myAlLClosed, myNotClosed);
+
+        for (PieChart.Data data : pieChart.getData()) {
+            Tooltip tooltip = new Tooltip(data.getName() + ": " + (int) data.getPieValue());
+            Tooltip.install(data.getNode(), tooltip);
+            data.pieValueProperty().addListener((observable, oldValue, newValue) ->
+                    tooltip.setText(data.getName() + ": " + newValue.intValue())
+            );
+        }
+
+        pieChart.setTitle("Reports chart");
+        pieChart.setLabelsVisible(true);
     }
 
     private void openAllNotAssignedReportsView() {
         allNotAssignedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "reportsView/reportsTable-view.fxml");
+            loadReports(() -> operatorRestClient.getAllNotAssignedReports(), "report/reportsTable-view.fxml", "All not assigned Reports");
         });
     }
 
     private void openMyNotClosedReportsView() {
         myNotClosedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getMyNotClosedReports(), "reportsView/reportsTable-view.fxml");
+            loadReports(() -> operatorRestClient.getMyNotClosedReports(), "report/reportsTable-view.fxml", "My not closed Reports");
         });
     }
 
     private void openMyClosedReportsView() {
         myClosedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getMyAllClosedReports(), "reportsView/reportsTable-view.fxml");
+            loadReports(() -> operatorRestClient.getMyAllClosedReports(), "report/reportsTable-view.fxml", "My all closed Reports");
         });
     }
 
     private void openAllAssignedReportsView() {
         allAssignedCard.setOnMouseClicked(x -> {
-            loadReports(() -> operatorRestClient.getAllAssignedReports(), "reportsView/reportsTable-view.fxml");
+            loadReports(() -> operatorRestClient.getAllAssignedReports(), "report/reportsTable-view.fxml", "All Assigned Reports");
         });
     }
 
     private void openMyInProgressReportsView() {
         myInProgressCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getMyInProgressReports(), "reportsView/reportsTable-view.fxml");
+            loadReports(() -> operatorRestClient.getMyInProgressReports(), "report/reportsTable-view.fxml", "My Inprogress Reports");
         });
     }
 
     private void openAllSolvedReportsView() {
         allClosedCard.setOnMouseClicked((x) -> {
-            loadReports(() -> operatorRestClient.getAllSolvedReports(), "reportsView/reportsTable-view.fxml");
+            loadReports(() -> operatorRestClient.getAllSolvedReports(), "report/reportsTable-view.fxml", "All Solved Reports");
         });
     }
 
-    private void loadReports(Supplier<List<ReportDto>> reportSupplier, String viewPath) {
+    private void loadReports(Supplier<List<ReportDto>> reportSupplier, String viewPath, String label) {
         Stage waitingPopup = popupFactory.createWaitingPopup("Loading data...");
         waitingPopup.show();
 
         CompletableFuture
-            .supplyAsync(reportSupplier::get)
-            .thenAccept(reportDtoList -> {
-                Platform.runLater(() -> {
-                    ReportCardManager.getInstance().setReportDtoList(reportDtoList);
-                    waitingPopup.close();
-                    viewManager.loadView(viewPath);
+                .supplyAsync(reportSupplier::get)
+                .thenAccept(reportDtoList -> {
+                    Platform.runLater(() -> {
+                        ReportCardManager.getInstance().setReportDtoList(reportDtoList);
+                        waitingPopup.close();
+                        try {
+                            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(viewPath));
+                            AnchorPane view = loader.load();
+                            ReportViewController controller = loader.getController();
+                            controller.setLabel(label);
+                            viewManager.saveCurrentView(viewPath);
+                            dashboardAnchorPane.getChildren().setAll(view);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }).exceptionally(ex -> {
+                    Platform.runLater(waitingPopup::close);
+                    return null;
                 });
-        }).exceptionally(ex -> {
-            Platform.runLater(waitingPopup::close);
-            return null;
-        });
     }
 
     private void initializeLabels() {
@@ -163,13 +174,14 @@ public class OperatorDashboardController implements Initializable {
             @Override
             protected void succeeded() {
                 Platform.runLater(() -> {
-                    HashMap<String, Integer> data = getValue();
-                    allNotAssignedLabel.setText(String.valueOf(data.get("allNotAssigned")));
-                    allAssignedByUserLabel.setText(String.valueOf(data.get("allAssignedByUser")));
-                    allClosedByUserLabel.setText(String.valueOf(data.get("allClosedByUser")));
-                    allAssignedLabel.setText(String.valueOf(data.get("allAssigned")));
-                    inProgressLabel.setText(String.valueOf(data.get("allInProgressByUser")));
-                    allClosedLabel.setText(String.valueOf(data.get("allClosed")));
+                    dashboardData = getValue();
+                    allNotAssignedLabel.setText(String.valueOf(dashboardData.get("allNotAssigned")));
+                    allAssignedByUserLabel.setText(String.valueOf(dashboardData.get("allAssignedByUser")));
+                    allClosedByUserLabel.setText(String.valueOf(dashboardData.get("allClosedByUser")));
+                    allAssignedLabel.setText(String.valueOf(dashboardData.get("allAssigned")));
+                    inProgressLabel.setText(String.valueOf(dashboardData.get("allInProgressByUser")));
+                    allClosedLabel.setText(String.valueOf(dashboardData.get("allClosed")));
+                    initializePieChart();
                 });
             }
 

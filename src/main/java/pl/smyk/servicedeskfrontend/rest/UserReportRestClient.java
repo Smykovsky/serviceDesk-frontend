@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import pl.smyk.servicedeskfrontend.dto.CommentRequest;
 import pl.smyk.servicedeskfrontend.dto.ReportDto;
 import pl.smyk.servicedeskfrontend.session.SessionManager;
 
@@ -95,5 +96,20 @@ public class UserReportRestClient {
         );
 
         return response.getBody();
+    }
+
+    public ResponseEntity<?> commentArticle(CommentRequest request) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
+        HttpEntity<?> entity = new HttpEntity<>(request, headers);
+
+        ResponseEntity<?> response = restTemplate.exchange(
+                "http://localhost:8080/api/article/comment/add",
+                HttpMethod.POST,
+                entity,
+                String.class
+        );
+
+        return response;
     }
 }

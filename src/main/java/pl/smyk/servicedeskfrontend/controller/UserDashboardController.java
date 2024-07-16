@@ -73,19 +73,19 @@ public class UserDashboardController implements Initializable {
 
     private void openMyAllNotAssignedCard() {
         myNotAssignedCard.setOnMouseClicked((x) -> {
-            loadReports(userReportRestClient::getMyNotAssignedReports, "reportsView/reportsTable-view.fxml");
+            loadReports(userReportRestClient::getMyNotAssignedReports, "report/reportsTable-view.fxml");
         });
     }
 
     private void openMyAllAssignedCard() {
         myAssignedCard.setOnMouseClicked((x) -> {
-            loadReports(userReportRestClient::getMyAssignedReports, "reportsView/reportsTable-view.fxml");
+            loadReports(userReportRestClient::getMyAssignedReports, "report/reportsTable-view.fxml");
         });
     }
 
     private void openMyAllClosedReports() {
         myClosedCard.setOnMouseClicked((x) -> {
-            loadReports(userReportRestClient::getMyClosedReports, "reportsView/reportsTable-view.fxml");
+            loadReports(userReportRestClient::getMyClosedReports, "report/reportsTable-view.fxml");
         });
     }
 
@@ -134,7 +134,7 @@ public class UserDashboardController implements Initializable {
 
     private void initializeAddButton() {
         addButton.setOnAction((x) -> {
-            viewManager.loadNewWindow("addReportForm-view.fxml");
+            viewManager.loadNewWindow("report/addReportForm-view.fxml");
         });
     }
 }

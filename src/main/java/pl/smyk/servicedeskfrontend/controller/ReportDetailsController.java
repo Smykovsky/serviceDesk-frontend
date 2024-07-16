@@ -76,7 +76,7 @@ public class ReportDetailsController implements Initializable{
     private void initializeAssignButton() {
         assignButton.setOnAction(x -> {
             try {
-                FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("assignReport-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("report/assignReport-view.fxml"));
                 AnchorPane root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
@@ -106,7 +106,7 @@ public class ReportDetailsController implements Initializable{
     private void initializeCloseButton() {
         closeButton.setOnAction(x -> {
             try {
-                FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("closeReport-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("report/closeReport-view.fxml"));
                 AnchorPane root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();

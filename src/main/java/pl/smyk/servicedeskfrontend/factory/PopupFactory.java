@@ -19,6 +19,7 @@ public class PopupFactory {
         VBox pane = new VBox();
         pane.setAlignment(Pos.CENTER);
         pane.setSpacing(10);
+        pane.setStyle(createVboxStyle());
 
         Label label = new Label(text);
 
@@ -38,6 +39,7 @@ public class PopupFactory {
         VBox pane = new VBox();
         pane.setAlignment(Pos.CENTER);
         pane.setSpacing(10);
+        pane.setStyle(createVboxStyle());
 
         Label label = new Label(text);
         ProgressBar progressBar = new ProgressBar();
@@ -45,5 +47,9 @@ public class PopupFactory {
         stage.setScene(new Scene(pane, 200, 100));
         stage.initModality(Modality.APPLICATION_MODAL);
         return stage;
+    }
+
+    private String createVboxStyle() {
+        return "-fx-background-color: lightgrey; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: black";
     }
 }
