@@ -43,6 +43,7 @@ public class ViewManager {
             Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
             stage.setScene(scene);
             stage.setTitle("Service Desk");
+            stage.setResizable(false);
             primaryStage.close();
             stage.show();
         } catch (IOException e) {
@@ -66,6 +67,7 @@ public class ViewManager {
             AnchorPane newPane = fxmlLoader.load();
             Scene scene = new Scene(newPane);
             Stage stage = new Stage();
+            stage.setResizable(false);
             saveCurrentView(fxmlFile);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
