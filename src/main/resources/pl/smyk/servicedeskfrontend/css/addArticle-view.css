@@ -34,16 +34,30 @@ TextArea {
     -fx-padding: 4;
 }
 
-.actionBtn {
+.btn {
     -fx-font-size: 14px;
     -fx-text-fill: white;
     -fx-background-color: #0077b6;
     -fx-border-radius: 4px;
 }
 
-.actionBtn:hover {
+.btn:hover {
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-background-color: #0233e8;
+    -fx-cursor: pointer;
+}
+
+.btn-close {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-color: #f94449;
+    -fx-border-radius: 4px;
+}
+
+.btn-close:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-background-color: #ff2c2c;
     -fx-cursor: pointer;
 }

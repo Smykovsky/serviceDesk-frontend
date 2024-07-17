@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane fx:id="addArticleAnchorPane" prefHeight="400.0" prefWidth="350.0" styleClass="mainContainer" stylesheets="@../css/addArticle-view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.AddArticleController">
    <children>
       <Label layoutX="129.0" layoutY="22.0" styleClass="titleLabel" text="Add Article" />
@@ -16,7 +15,7 @@
       <TextField fx:id="titleTextField" layoutX="104.0" layoutY="86.0" prefHeight="30.0" prefWidth="200.0" />
       <TextArea fx:id="descriptionTextArea" layoutX="104.0" layoutY="135.0" prefHeight="130.0" prefWidth="200.0" />
       <Label fx:id="fileNameLabel" layoutX="173.0" layoutY="291.0" styleClass="fileNameLabel" text="fileName" />
-      <Button fx:id="addArticleButton" layoutX="99.0" layoutY="345.0" mnemonicParsing="false" styleClass="actionBtn" text="Add Article" />
-      <Button fx:id="cancelButton" layoutX="195.0" layoutY="345.0" mnemonicParsing="false" styleClass="actionBtn" text="Cancel" />
+      <Button fx:id="addArticleButton" layoutX="185.0" layoutY="347.0" mnemonicParsing="false" styleClass="btn" text="Add Article" />
+      <Button fx:id="cancelButton" layoutX="111.0" layoutY="347.0" mnemonicParsing="false" styleClass="btn-close" text="Cancel" />
    </children>
 </AnchorPane>
