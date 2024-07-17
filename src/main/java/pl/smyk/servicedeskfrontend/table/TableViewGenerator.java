@@ -54,7 +54,7 @@ public class TableViewGenerator <T> {
                 if (!row.isEmpty() && event.getClickCount() == 1) {
                     T clickedRow = row.getItem();
                     System.out.println("Selected: " + clickedRow.toString());
-                    SessionManager.getInstance().getViewHistory().push("reportsView/reportsTable-view.fxml");
+                    SessionManager.getInstance().getViewHistory().push("report/reportsTable-view.fxml");
                     System.out.println(SessionManager.getInstance().getViewHistory());
                     openDetailView((ReportDto) clickedRow, mainAnchorPane);
                 }
@@ -67,7 +67,7 @@ public class TableViewGenerator <T> {
 
     private void openDetailView(ReportDto report, AnchorPane mainAnchorPane) {
         try {
-            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("reportsView/reportDetails-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("report/reportDetails-view.fxml"));
             Parent root = loader.load();
 
             ReportDetailsController controller = loader.getController();

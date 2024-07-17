@@ -10,6 +10,7 @@
 .card-pane:hover {
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
+    -fx-cursor: pointer;
 }
 
 .card-grey {
@@ -27,8 +28,6 @@
 .card-dark {
     -fx-background-color: grey;
 }
-
-
 
 .card-label {
     -fx-padding: 0 0 0 15   ;

@@ -27,17 +27,17 @@ import java.util.ResourceBundle;
 public class AssignReportController implements Initializable {
     @FXML
     private AnchorPane assignReportFormAnchorPane;
-
     @FXML
     private Button closeButtton;
-
     @FXML
     private ComboBox<String> operatorComboBox;
-
     @FXML
     private Button saveButton;
+    @FXML
+    private Button assignToMeButton;
+
     private final OperatorRestClient operatorRestClient;
-    private Long selectedReportId;
+    private Long reportId;
     private ViewManager viewManager;
 
     public AssignReportController() {
@@ -45,7 +45,7 @@ public class AssignReportController implements Initializable {
     }
 
     public void setReportId(Long id) {
-        selectedReportId = id;
+        reportId = id;
     }
 
     @Override
@@ -54,14 +54,27 @@ public class AssignReportController implements Initializable {
         initializeComboBox();
         initializeSaveButton();
         initializeCloseButton();
+        initializeAssignToMeButton();
     }
 
     private void initializeSaveButton() {
         saveButton.setOnAction(event -> {
             String selectedOperator = operatorComboBox.getSelectionModel().getSelectedItem();
-            AssignReportRequest dto = new AssignReportRequest(selectedReportId, selectedOperator);
+            AssignReportRequest dto = new AssignReportRequest(reportId, selectedOperator);
             Thread thread = new Thread(() -> {
                 operatorRestClient.assignReportToOperator(dto);
+                Platform.runLater(() -> {
+                    getStage().close();
+                });
+            });
+            thread.start();
+        });
+    }
+
+    private void initializeAssignToMeButton() {
+        assignToMeButton.setOnAction(x -> {
+            Thread thread = new Thread(() -> {
+                operatorRestClient.assignReportLoggedOperator(reportId);
                 Platform.runLater(() -> {
                     getStage().close();
                 });
@@ -79,7 +92,6 @@ public class AssignReportController implements Initializable {
     private void initializeComboBox() {
         List<String> operatorUsernames = operatorRestClient.loadOperatorUsernames();
         operatorComboBox.setItems(FXCollections.observableArrayList(operatorUsernames));
-
     }
 
     private Stage getStage() {

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="closeReportAnchorPane" prefHeight="100.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.CloseReportController">
+<AnchorPane fx:id="closeReportAnchorPane" prefHeight="150.0" prefWidth="250.0" stylesheets="@../css/modalForm-view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.CloseReportController">
    <children>
-      <Label layoutX="14.0" prefHeight="40.0" prefWidth="225.0" text="Are you sure you want to close the report?" />
-      <Button fx:id="closeButton" layoutX="50.0" layoutY="50.0" mnemonicParsing="false" text="Close" />
-      <Button fx:id="leaveButton" layoutX="158.0" layoutY="50.0" mnemonicParsing="false" styleClass="btn" text="Leave" />
+      <Label layoutX="14.0" prefHeight="42.0" prefWidth="226.0" text="Are you sure you want to change status?" />
+      <Button fx:id="closeButton" layoutX="50.0" layoutY="101.0" mnemonicParsing="false" styleClass="btn-close" text="Leave" />
+      <Button fx:id="updateButton" layoutX="156.0" layoutY="101.0" mnemonicParsing="false" styleClass="btn" text="Update" />
+      <Label layoutX="22.0" layoutY="51.0" text="Status" />
+      <ComboBox fx:id="statusComboBox" layoutX="81.0" layoutY="47.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

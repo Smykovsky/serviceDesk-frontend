@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="reportDetailsAnchorPane" prefHeight="768.0" prefWidth="824.0" styleClass="root-pane" stylesheets="@../css/reportDetails-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.ReportDetailsController">
+<AnchorPane fx:id="reportDetailsAnchorPane" prefHeight="768.0" prefWidth="824.0" styleClass="root-pane" stylesheets="@../css/reportDetails-view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.ReportDetailsController">
     <GridPane layoutX="62.0" layoutY="14.0" prefHeight="500.0" prefWidth="700.0" styleClass="details-grid">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
@@ -45,7 +45,7 @@
             <Label fx:id="createdByLabel" prefHeight="71.0" prefWidth="351.0" styleClass="label-value" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         </children>
     </GridPane>
-   <Button fx:id="assignButton" layoutX="263.0" layoutY="595.0" mnemonicParsing="false" styleClass="btn" text="Assign" />
-   <Button fx:id="closeButton" layoutX="462.0" layoutY="595.0" mnemonicParsing="false" styleClass="btn" text="Close" />
-   <Button fx:id="leaveButton" layoutX="366.0" layoutY="595.0" mnemonicParsing="false" styleClass="btn" text="Leave" />
+   <Button fx:id="assignButton" layoutX="278.0" layoutY="594.0" mnemonicParsing="false" styleClass="btn" text="Assign" />
+   <Button fx:id="closeButton" layoutX="477.0" layoutY="594.0" mnemonicParsing="false" styleClass="btn" text="Update" />
+   <Button fx:id="leaveButton" layoutX="381.0" layoutY="594.0" mnemonicParsing="false" styleClass="btn" text="Leave" />
 </AnchorPane>

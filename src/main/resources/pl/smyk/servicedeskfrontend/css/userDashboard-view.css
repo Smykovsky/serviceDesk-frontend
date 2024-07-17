@@ -25,3 +25,6 @@
     -fx-content-display: center;
     -fx-text-fill: white;
 }
+
+.card-label:hover {
+}

@@ -151,7 +151,20 @@ public class OperatorRestClient {
                 entity,
                 ResponseEntity.class
         );
+        return response;
+    }
 
+    public ResponseEntity<?> assignReportLoggedOperator(Long reportId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
+        HttpEntity<?> entity = new HttpEntity<>(reportId, headers);
+
+        ResponseEntity<?> response = restTemplate.exchange(
+                REPORTS_URL + "/assign-logged",
+                HttpMethod.POST,
+                entity,
+                ResponseEntity.class
+        );
         return response;
     }
 
@@ -164,7 +177,22 @@ public class OperatorRestClient {
                 REPORTS_URL + "/close",
                 HttpMethod.POST,
                 entity,
-                ResponseEntity.class
+                String.class
+        );
+
+        return response;
+    }
+
+    public ResponseEntity<?> changeReportStatusToInProgress(Long reportId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + SessionManager.getInstance().getAccessToken());
+        HttpEntity<?> entity = new HttpEntity<>(reportId, headers);
+
+        ResponseEntity<?> response = restTemplate.exchange(
+                REPORTS_URL + "/inProgress",
+                HttpMethod.POST,
+                entity,
+                String.class
         );
 
         return response;

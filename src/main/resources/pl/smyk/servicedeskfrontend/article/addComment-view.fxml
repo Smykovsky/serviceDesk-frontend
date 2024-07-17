@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="addCommentAnchorPane" prefHeight="200.0" prefWidth="224.0" stylesheets="@../css/addComment-view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.AddCommentController">
+<AnchorPane fx:id="addCommentAnchorPane" prefHeight="200.0" prefWidth="224.0" stylesheets="@../css/modalForm-view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.AddCommentController">
    <children>
       <Label layoutX="74.0" layoutY="14.0" text="Add comment">
          <font>
@@ -16,7 +15,7 @@
       </Label>
       <Label layoutX="14.0" layoutY="90.0" styleClass="commentLabel" text="Treść: " />
       <TextArea fx:id="commentTextArea" layoutX="60.0" layoutY="48.0" prefHeight="100.0" prefWidth="150.0" styleClass="commentTextArea" />
-      <Button fx:id="addButton" layoutX="68.0" layoutY="159.0" mnemonicParsing="false" styleClass="btn-add" text="Add" />
-      <Button fx:id="closeButton" layoutX="112.0" layoutY="159.0" mnemonicParsing="false" styleClass="btn-close" text="Close" />
+      <Button fx:id="addButton" layoutX="121.0" layoutY="161.0" mnemonicParsing="false" styleClass="btn" text="Add" />
+      <Button fx:id="closeButton" layoutX="65.0" layoutY="161.0" mnemonicParsing="false" styleClass="btn-close" text="Close" />
    </children>
 </AnchorPane>

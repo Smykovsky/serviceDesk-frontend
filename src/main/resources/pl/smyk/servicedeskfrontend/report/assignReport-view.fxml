@@ -5,12 +5,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane fx:id="assignReportFormAnchorPane" prefHeight="150.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.AssignReportController">
+<AnchorPane fx:id="assignReportFormAnchorPane" prefHeight="150.0" prefWidth="250.0" stylesheets="@../css/modalForm-view.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.smyk.servicedeskfrontend.controller.AssignReportController">
    <children>
-      <ComboBox fx:id="operatorComboBox" layoutX="25.0" layoutY="49.0" prefWidth="150.0" />
-      <Label layoutX="57.0" layoutY="26.0" text="Select operator: " />
-      <Button fx:id="saveButton" layoutX="25.0" layoutY="102.0" mnemonicParsing="false" styleClass="btn" text="Save" />
-      <Button fx:id="closeButtton" layoutX="130.0" layoutY="102.0" mnemonicParsing="false" styleClass="btn" text="Close" />
+      <ComboBox fx:id="operatorComboBox" layoutX="50.0" layoutY="50.0" prefWidth="150.0" />
+      <Label layoutX="77.0" layoutY="14.0" text="Select operator: " />
+      <Button fx:id="saveButton" layoutX="179.0" layoutY="101.0" mnemonicParsing="false" styleClass="btn" text="Save" />
+      <Button fx:id="closeButtton" layoutX="30.0" layoutY="101.0" mnemonicParsing="false" styleClass="btn-close" text="Close" />
+      <Button fx:id="assignToMeButton" layoutX="83.0" layoutY="101.0" mnemonicParsing="false" styleClass="btn" text="Assign To ME" />
    </children>
 </AnchorPane>

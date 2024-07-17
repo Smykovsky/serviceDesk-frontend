@@ -45,4 +45,5 @@ TextArea {
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
     -fx-background-color: #0233e8;
+    -fx-cursor: pointer;
 }
